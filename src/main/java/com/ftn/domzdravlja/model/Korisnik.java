@@ -6,7 +6,6 @@ public class Korisnik {
 	private String prezime;
 	private String email;
 	private String lozinka;
-	private String korisnickoIme;
 	private Adresa adresa; 
 	private String brojTelefona;
 	
@@ -14,15 +13,13 @@ public class Korisnik {
 		
 	}
 
-	public Korisnik(String id, String ime, String prezime, String email, String lozinka, String korisnickoIme,
-			Adresa adresa, String brojTelefona) {
+	public Korisnik(String id, String ime, String prezime, String email, String lozinka, Adresa adresa, String brojTelefona) {
 		super();
 		this.id = id;
 		this.ime = ime;
 		this.prezime = prezime;
 		this.email = email;
 		this.lozinka = lozinka;
-		this.korisnickoIme = korisnickoIme;
 		this.adresa = adresa;
 		this.brojTelefona = brojTelefona;
 	}
@@ -67,14 +64,6 @@ public class Korisnik {
 		this.lozinka = lozinka;
 	}
 
-	public String getKorisnickoIme() {
-		return korisnickoIme;
-	}
-
-	public void setKorisnickoIme(String korisnickoIme) {
-		this.korisnickoIme = korisnickoIme;
-	}
-
 	public Adresa getAdresa() {
 		return adresa;
 	}
@@ -94,7 +83,7 @@ public class Korisnik {
 	@Override
 	public String toString() {
 		return "Korisnik [id=" + id + ", ime=" + ime + ", prezime=" + prezime + ", email=" + email + ", lozinka="
-				+ lozinka + ", korisnickoIme=" + korisnickoIme + ", adresa=" + adresa + ", brojTelefona=" + brojTelefona
+				+ lozinka + ", adresa=" + adresa + ", brojTelefona=" + brojTelefona
 				+ "]";
 	}
 
@@ -122,9 +111,4 @@ public class Korisnik {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
 }
