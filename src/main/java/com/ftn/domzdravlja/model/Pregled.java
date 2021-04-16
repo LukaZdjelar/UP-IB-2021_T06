@@ -1,20 +1,52 @@
 package com.ftn.domzdravlja.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="pregled")
 public class Pregled {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="pregled_id", unique=true, nullable=false)
+	private Integer id;
+	
+	@OneToOne
+	@JoinColumn(name="termin_id", referencedColumnName="termin_id", nullable=false)
 	private Termin termin;
+	
+	@ManyToOne
+	@JoinColumn(name="pacijent_korisnik_id", referencedColumnName="korisnik_id", nullable=false)
 	private Pacijent pacijent;
+	
+	@Column(name="opis", unique=false, nullable=false)
 	private String opis;
 	
 	public Pregled() {
 		super();
 	}
 
-	public Pregled(Termin termin, Pacijent pacijent, String opis) {
+	public Pregled(Integer id, Termin termin, Pacijent pacijent, String opis) {
 		super();
 		this.termin = termin;
 		this.pacijent = pacijent;
 		this.opis = opis;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Termin getTermin() {
@@ -43,6 +75,6 @@ public class Pregled {
 
 	@Override
 	public String toString() {
-		return "Pregled [termin=" + termin + ", pacijent=" + pacijent + ", opis=" + opis + "]";
+		return "Pregled [id=" + id + ", termin=" + termin + ", pacijent=" + pacijent + ", opis=" + opis + "]";
 	}
 }
