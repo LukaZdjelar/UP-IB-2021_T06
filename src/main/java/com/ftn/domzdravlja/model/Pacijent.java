@@ -1,14 +1,21 @@
 package com.ftn.domzdravlja.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="pacijent")
 public class Pacijent extends Korisnik {
 
+	@Column(name="lbo", unique=true, nullable=false)
 	private String LBO;
 	
 	public Pacijent() {
 		super();
 	}
 
-	public Pacijent(String id, String ime, String prezime, String email, String lozinka, Adresa adresa,
+	public Pacijent(Integer id, String ime, String prezime, String email, String lozinka, Adresa adresa,
 			String brojTelefona, String lBO) {
 		super(id, ime, prezime, email, lozinka, adresa, brojTelefona);
 		this.LBO = lBO;
