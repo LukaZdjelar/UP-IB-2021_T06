@@ -1,38 +1,17 @@
 package com.ftn.domzdravlja.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="klinika")
 public class Klinika {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="klinika_id", unique=true, nullable=false)
-	private Integer id;
-	
-	@Column(name="naziv", unique=false, nullable=false)
+	private int id;
 	private String naziv;
-	
-	@ManyToOne
-	@JoinColumn(name="adresa_id", referencedColumnName="adresa_id", nullable=false)
 	private Adresa adresa;
-	
-	@Column(name="opis", unique=false, nullable=false)
 	private String opis;
 	
 	public Klinika() {
 		
 	}
 
-	public Klinika(Integer id, String naziv, Adresa adresa, String opis) {
+	public Klinika(int id, String naziv, Adresa adresa, String opis) {
 		super();
 		this.id = id;
 		this.naziv = naziv;
@@ -40,11 +19,11 @@ public class Klinika {
 		this.opis = opis;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

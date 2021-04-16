@@ -1,50 +1,19 @@
 package com.ftn.domzdravlja.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@Table(name="korisnik")
 public class Korisnik {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="korisnik_id", unique=true, nullable=false)
-	private Integer id;
-	
-	@Column(name="ime", unique=false, nullable=false)
+	private String id;
 	private String ime;
-	
-	@Column(name="prezime", unique=false, nullable=false)
 	private String prezime;
-	
-	@Column(name="email", unique=false, nullable=false)
 	private String email;
-	
-	@Column(name="", unique=false, nullable=false)
 	private String lozinka;
-	
-	@ManyToOne
-	@JoinColumn(name="adresa_id", referencedColumnName="adresa_id", nullable=false)
-	private Adresa adresa;
-	
-	@Column(name="brojTelefona", unique=false, nullable=false)
+	private Adresa adresa; 
 	private String brojTelefona;
 	
 	public Korisnik() {
 		
 	}
 
-	public Korisnik(Integer id, String ime, String prezime, String email, String lozinka, Adresa adresa, String brojTelefona) {
+	public Korisnik(String id, String ime, String prezime, String email, String lozinka, Adresa adresa, String brojTelefona) {
 		super();
 		this.id = id;
 		this.ime = ime;
@@ -55,11 +24,11 @@ public class Korisnik {
 		this.brojTelefona = brojTelefona;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

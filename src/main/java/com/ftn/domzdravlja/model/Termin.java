@@ -2,61 +2,25 @@ package com.ftn.domzdravlja.model;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="termin")
 public class Termin {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="termin_id", unique=true, nullable=false)
-	private Integer id;
-	
-	@ManyToOne
-	@JoinColumn(name="lekar_korisnik_id", referencedColumnName="korisnik_id", nullable=false)
 	private Osoblje lekar;
-	
-	@ManyToOne
-	@JoinColumn(name="klinika_id", referencedColumnName="klinika_id", nullable=false)
 	private Klinika klinika;
-	
-	@Column(name="datumIVreme", unique=false, nullable=false)
 	private LocalDateTime datumIVreme;
-	
-	@Column(name="cena", unique=false, nullable=false)
-	private Float cena;
-	
-	@Column(name="trajanje", unique=false, nullable=false)
-	private Integer trajanje;
+	private float cena;
+	private int trajanje;
 	
 	public Termin() {
 		super();
 	}
 
-	public Termin(Integer id, Osoblje lekar, Klinika klinika, LocalDateTime datumIVreme, Float cena, Integer trajanje) {
+	public Termin(Osoblje lekar, Klinika klinika, LocalDateTime datumIVreme, float cena, int trajanje) {
 		super();
-		this.id = id;
 		this.lekar = lekar;
 		this.klinika = klinika;
 		this.datumIVreme = datumIVreme;
 		this.cena = cena;
 		this.trajanje = trajanje;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public Osoblje getLekar() {
@@ -83,25 +47,25 @@ public class Termin {
 		this.datumIVreme = datumIVreme;
 	}
 
-	public Float getCena() {
+	public float getCena() {
 		return cena;
 	}
 
-	public void setCena(Float cena) {
+	public void setCena(float cena) {
 		this.cena = cena;
 	}
 
-	public Integer getTrajanje() {
+	public int getTrajanje() {
 		return trajanje;
 	}
 
-	public void setTrajanje(Integer trajanje) {
+	public void setTrajanje(int trajanje) {
 		this.trajanje = trajanje;
 	}
 
 	@Override
 	public String toString() {
-		return "Termin [id=" + id + ", lekar=" + lekar + ", klinika=" + klinika + ", datumIVreme=" + datumIVreme
-				+ ", cena=" + cena + ", trajanje=" + trajanje + "]";
+		return "Termin [lekar=" + lekar + ", klinika=" + klinika + ", datumIVreme=" + datumIVreme + ", cena=" + cena
+				+ ", trajanje=" + trajanje + "]";
 	}
 }
