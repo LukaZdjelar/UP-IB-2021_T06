@@ -21,14 +21,14 @@ public class Termin {
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name="lekar_korisnik_id", referencedColumnName="korisnik_id", nullable=false)
+	@JoinColumn(name="lekar", referencedColumnName="korisnik_id", nullable=false)
 	private Osoblje lekar;
 	
 	@ManyToOne
 	@JoinColumn(name="klinika_id", referencedColumnName="klinika_id", nullable=false)
 	private Klinika klinika;
 	
-	@Column(name="datumIVreme", unique=false, nullable=false)
+	@Column(name="datumivreme", unique=false, nullable=false)
 	private LocalDateTime datumIVreme;
 	
 	@Column(name="cena", unique=false, nullable=false)
