@@ -37,7 +37,7 @@ public class Korisnik {
 	@JoinColumn(name="adresa_id", referencedColumnName="adresa_id", nullable=false)
 	private Adresa adresa;
 	
-	@Column(name="brojTelefona", unique=false, nullable=false)
+	@Column(name="brojtelefona", unique=false, nullable=false)
 	private String brojTelefona;
 	
 	public Korisnik() {

@@ -24,7 +24,7 @@ public class Pregled {
 	private Termin termin;
 	
 	@ManyToOne
-	@JoinColumn(name="pacijent_korisnik_id", referencedColumnName="korisnik_id", nullable=false)
+	@JoinColumn(name="pacijent", referencedColumnName="korisnik_id", nullable=false)
 	private Pacijent pacijent;
 	
 	@Column(name="opis", unique=false, nullable=false)
