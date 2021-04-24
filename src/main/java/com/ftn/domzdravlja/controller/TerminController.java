@@ -30,10 +30,13 @@ public class TerminController {
 	private KlinikaService klinikaService;
 	
 	@PostMapping("/create")
-	public ResponseEntity<TerminDTO> create(Termin termin) {
+	public ResponseEntity<TerminDTO> create(Termin termin, String DIVString) {
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+		LocalDateTime datumIVreme = LocalDateTime.parse(DIVString, formatter);
 		
 		//TEMPORARY
-		termin.setDatumIVreme(LocalDateTime.now());
+		termin.setDatumIVreme(datumIVreme);
 		Termin save = terminService.saveTermin(termin);
 		
 		return new ResponseEntity<TerminDTO>(new TerminDTO(save), HttpStatus.OK);
