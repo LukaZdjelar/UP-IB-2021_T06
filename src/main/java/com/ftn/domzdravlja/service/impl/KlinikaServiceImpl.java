@@ -1,5 +1,7 @@
 package com.ftn.domzdravlja.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,11 @@ public class KlinikaServiceImpl implements KlinikaService {
 	@Override
 	public Klinika save(Klinika klinika) {
 		return klinikaRepository.save(klinika);
+	}
+
+	@Override
+	public List<Klinika> findAll() {
+		return klinikaRepository.findAll();
 	}
 
 }
