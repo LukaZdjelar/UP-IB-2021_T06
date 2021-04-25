@@ -18,4 +18,9 @@ public class KlinikaServiceImpl implements KlinikaService {
 		return klinikaRepository.findKlinikaById(id);
 	}
 
+	@Override
+	public Klinika save(Klinika klinika) {
+		return klinikaRepository.save(klinika);
+	}
+
 }
