@@ -39,11 +39,10 @@ public class PacijentController {
 	public ResponseEntity<PacijentDTO> update(Pacijent pacijent) {
 		
 		Pacijent nadji = pacijentService.findPacijentById(pacijent.getId());
-		pacijent.setIme(nadji.getIme());
-		pacijent.setPrezime (nadji.getPrezime());
+		
 		pacijent.setAdresa(nadji.getAdresa());
-		pacijent.setBrojTelefona(nadji.getBrojTelefona());
 		pacijent.setLBO(nadji.getLBO());
+		
 		Pacijent p = pacijentService.save(pacijent);
 		
 		return new ResponseEntity<PacijentDTO>(new PacijentDTO(p), HttpStatus.OK);
