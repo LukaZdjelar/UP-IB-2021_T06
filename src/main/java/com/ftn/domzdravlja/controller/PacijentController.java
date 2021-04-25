@@ -1,5 +1,8 @@
 package com.ftn.domzdravlja.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ftn.domzdravlja.dto.KlinikaDTO;
 import com.ftn.domzdravlja.dto.PacijentDTO;
+import com.ftn.domzdravlja.model.Klinika;
 import com.ftn.domzdravlja.model.Pacijent;
 import com.ftn.domzdravlja.service.PacijentService;
 
@@ -42,5 +47,19 @@ public class PacijentController {
 		Pacijent p = pacijentService.save(pacijent);
 		
 		return new ResponseEntity<PacijentDTO>(new PacijentDTO(p), HttpStatus.OK);
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<PacijentDTO>> search(){
+		
+		List<Pacijent> pacijenti = pacijentService.findAll();
+		
+		List<PacijentDTO> dtoList = new ArrayList<PacijentDTO>();
+		
+		for (Pacijent pacijent : pacijenti) {
+			dtoList.add(new PacijentDTO(pacijent));
+		}
+		
+		return new ResponseEntity<>(dtoList, HttpStatus.OK);
 	}
 }

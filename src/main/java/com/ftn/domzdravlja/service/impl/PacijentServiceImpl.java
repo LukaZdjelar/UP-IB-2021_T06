@@ -1,5 +1,7 @@
 package com.ftn.domzdravlja.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,11 @@ public class PacijentServiceImpl implements PacijentService{
 	@Override
 	public Pacijent save(Pacijent pacijent) {
 		return pacijentRepository.save(pacijent);
+	}
+	
+	@Override
+	public List<Pacijent> findAll() {
+		return pacijentRepository.findAll();
 	}
 
 }
