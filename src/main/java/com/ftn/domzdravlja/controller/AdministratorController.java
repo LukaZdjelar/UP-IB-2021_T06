@@ -35,8 +35,6 @@ public class AdministratorController {
 		
 		Administrator nadji = administratorService.findAdministratorById(administrator.getId());
 		administrator.setAdresa(nadji.getAdresa());
-		administrator.setKlinika(nadji.getKlinika());
-		administrator.setAdminKlinickogCentra(nadji.getAdminKlinickogCentra());
 		Administrator a = administratorService.save(administrator);
 		
 		return new ResponseEntity<AdministratorDTO>(new AdministratorDTO(a), HttpStatus.OK);
