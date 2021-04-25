@@ -3,11 +3,13 @@ package com.ftn.domzdravlja.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ftn.domzdravlja.model.Pregled;
 import com.ftn.domzdravlja.repository.PregledRepository;
 import com.ftn.domzdravlja.service.PregledService;
 
+@Service
 public class PregledServiceImpl implements PregledService{
 	
 	@Autowired
@@ -15,7 +17,7 @@ public class PregledServiceImpl implements PregledService{
 
 	@Override
 	public List<Pregled> findPregledByPacient(Integer id) {
-		return pregledRepository.findByPacijentById(id);
+		return pregledRepository.findPregledById(id);
 	}
 
 }

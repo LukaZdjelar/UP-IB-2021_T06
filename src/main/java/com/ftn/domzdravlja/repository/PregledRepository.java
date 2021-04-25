@@ -8,5 +8,5 @@ import com.ftn.domzdravlja.model.Pregled;
 
 public interface PregledRepository extends JpaRepository<Pregled, Integer>{
 
-	public List<Pregled> findByPacijentById(Integer id);
+	public List<Pregled> findPregledById(Integer id);
 }
