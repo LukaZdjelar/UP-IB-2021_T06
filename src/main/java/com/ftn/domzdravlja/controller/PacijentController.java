@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,7 +19,7 @@ import com.ftn.domzdravlja.model.Klinika;
 import com.ftn.domzdravlja.model.Pacijent;
 import com.ftn.domzdravlja.service.PacijentService;
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @Controller
 @RequestMapping("/pacijent")
 public class PacijentController {
