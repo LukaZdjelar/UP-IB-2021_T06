@@ -1,9 +1,16 @@
 package com.ftn.domzdravlja.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.net.ssl.SSLEngineResult.Status;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -14,14 +21,28 @@ import com.ftn.domzdravlja.model.Administrator;
 import com.ftn.domzdravlja.model.Korisnik;
 import com.ftn.domzdravlja.service.AdministratorService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @Controller
 @RequestMapping("/admin")
 public class AdministratorController {
 	
 	@Autowired
 	AdministratorService administratorService;
+	
+	@GetMapping
+	public ResponseEntity<List<AdministratorDTO>> findAll(){
+		
+		List<Administrator> administratori = administratorService.findAll();
+		List<AdministratorDTO> dtoList = new ArrayList<AdministratorDTO>();
+		
+		for(Administrator administrator:administratori) {
+			dtoList.add(new AdministratorDTO(administrator));
+		}
+		
+		return new ResponseEntity<>(dtoList, HttpStatus.OK);
+	}
 
-	@GetMapping(value="/{id}")
+	@GetMapping(value="about/{id}")
 	public ResponseEntity<AdministratorDTO> get(@PathVariable("id") Integer id) {
 		
 		Administrator a = administratorService.findAdministratorById(id);
