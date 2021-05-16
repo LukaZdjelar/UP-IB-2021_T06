@@ -1,5 +1,7 @@
 package com.ftn.domzdravlja.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,11 @@ public class AdministratorServiceImpl implements AdministratorService {
 	public Administrator save(Administrator administrator) {
 		
 		return administratorRepository.save(administrator);
+	}
+
+	@Override
+	public List<Administrator> findAll() {
+		return administratorRepository.findAll();
 	}
 
 }
