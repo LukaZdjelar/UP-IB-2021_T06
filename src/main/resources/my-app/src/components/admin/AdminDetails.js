@@ -11,7 +11,7 @@ class AdminDetails extends React.Component{
     }
 
     componentDidMount() {
-        axios.get("http://localhost:8080/klinickicentar/admin/about/"+this.props.match.params.id)
+        axios.get("http://localhost:8080/klinickicentar/admin/"+this.props.match.params.id)
         .then(response => {
             this.setState({
                 id:response.data.id,
@@ -24,10 +24,10 @@ class AdminDetails extends React.Component{
     render(){
         return(
             <div>
-                <p>Nasao sam!!</p>
                 <p>{this.state.id}</p>
                 <p>{this.state.ime}</p>
                 <p>{this.state.prezime}</p>
+                
             </div>
         )
     }

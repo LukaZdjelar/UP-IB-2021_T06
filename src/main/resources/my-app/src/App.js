@@ -23,7 +23,7 @@ function App() {
           <Route path="/sestra" component = {SestraComponent} exact/>
           <Route path="/termin" component = {TerminComponent} exact/>
           <Route path="/pacijent" component = {PacijentComponent} exact/>
-          <Route path="/admin/about/:id" component = {AdminAboutPage} exact/>
+          <Route path="/admin/:id" component = {AdminAboutPage} exact/>
       </div>
     </BrowserRouter>
   );

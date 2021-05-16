@@ -42,7 +42,7 @@ public class AdministratorController {
 		return new ResponseEntity<>(dtoList, HttpStatus.OK);
 	}
 
-	@GetMapping(value="about/{id}")
+	@GetMapping(value="/{id}")
 	public ResponseEntity<AdministratorDTO> get(@PathVariable("id") Integer id) {
 		
 		Administrator a = administratorService.findAdministratorById(id);
