@@ -1,39 +1,39 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react'
-import KlinikaServis from '../services/KlinikaService';
+import PregledService from '../services/PregledService';
 
-class KlinikaComponent extends React.Component {
+class PregledComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            klinike:[]
+            pregled:[]
         }
     }
 
     componentDidMount() {
-        KlinikaServis.getKlinike().then((response) => {
-            this.setState({klinike: response.data})
+        PregledService.getPregled().then((response) => {
+            this.setState({pregled: response.data})
         });
     }
 
     render () {
         return (
             <div>
-                <h1>Lista svih klinika</h1>
+                <h1>Istorija pregleda</h1>
                 <table>
                     <thead>
                         <tr>
-                            <td>Naziv</td>
+                            <td>Termin</td>
                             <td>Opis</td>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            this.state.klinike.map (
-                                klinika => 
-                                <tr key = {klinika.id}>
-                                    <td>{klinika.naziv}</td>
-                                    <td>{klinika.opis}</td>
+                            this.state.pregldedi.map (
+                                pregled => 
+                                <tr key = {pregled.id}>
+                                    <td>{pregled.termin}</td>
+                                    <td>{pregled.opis}</td>
                                 </tr>
                             )
                         }
@@ -43,4 +43,4 @@ class KlinikaComponent extends React.Component {
         )
     }
 }
-export default KlinikaComponent;
+export default PregledComponent;

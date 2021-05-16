@@ -8,6 +8,8 @@ import PregledComponent from './components/PregledComponent';
 import SestraComponent from './components/SestraComponent';
 import TerminComponent from './components/TerminComponent';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import ProfilPacijentaComponent from './components/ProfilPacijentaComponent';
+import IsotrijaPregledaComponent from './components/IstorijaPregledaComponent';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="/sestra" component = {SestraComponent}/>
           <Route path="/termin" component = {TerminComponent}/>
           <Route path="/pacijent" component = {PacijentComponent}/>
+          <Route path="/logovaniPacijent" component = {ProfilPacijentaComponent}/>
+          <Route path="/istorijaPregleda" component = {IsotrijaPregledaComponent}/>
         </Switch>
       </div>
     </Router>
