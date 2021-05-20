@@ -7,6 +7,7 @@ import KlinikaComponent from './components/KlinikaComponent';
 import PregledComponent from './components/PregledComponent';
 import SestraComponent from './components/SestraComponent';
 import TerminComponent from './components/TerminComponent';
+import RadniKalendar from './components/sestra/RadniKalendar';
 import { BrowserRouter, Route } from 'react-router-dom';
 import AdminTable from './components/admin/AdminTable';
 import AdminDetails from './components/admin/AdminDetails';
