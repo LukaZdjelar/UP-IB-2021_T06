@@ -1,5 +1,7 @@
 package com.ftn.domzdravlja.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,17 @@ public class TerminServiceImpl implements TerminService {
 	@Override
 	public Termin saveTermin(Termin termin) {
 		return terminRepository.save(termin);
+	}
+	
+	@Override
+	public List<Termin> findAll() {
+		return terminRepository.findAll();
+	}
+	
+	@Override
+	public Termin findTerminById(Integer id) {
+		Termin termin = terminRepository.findTerminById(id);
+		return termin;
 	}
 
 }

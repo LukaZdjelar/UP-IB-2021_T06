@@ -19,5 +19,9 @@ public class PregledServiceImpl implements PregledService{
 	public List<Pregled> findPregledByPacient(Integer id) {
 		return pregledRepository.findPregledById(id);
 	}
-
+	
+	@Override
+	public List<Pregled> findAll() {
+		return pregledRepository.findAll();	
+	}
 }
