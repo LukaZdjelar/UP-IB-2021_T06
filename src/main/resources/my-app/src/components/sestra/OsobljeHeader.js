@@ -7,9 +7,9 @@ class OsobljeHeader extends React.Component {
             <div className="header">
                 <nav>
                     <Link to="/pacijent">Lista Pacijenata</Link>
-                    <Link to="/radnikalendar">Radni Kalendar</Link>
-                    <Link to="/klinickicentar/profil">Profil</Link>
-                    <Link to="/klinickicentar/overavanjeRecepta">Overa Recepta</Link>
+                    <Link to="/osoblje/radnikalendar">Radni Kalendar</Link>
+                    <Link to="/osoblje/profil">Profil</Link>
+                    <Link to="/osoblje/overavanjeRecepta">Overa Recepta</Link>
                 </nav>
             </div>
         )

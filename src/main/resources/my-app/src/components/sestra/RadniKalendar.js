@@ -29,7 +29,7 @@ class RadniKalendar extends React.Component {
       console.log(pregled.termin.datumIVreme);
       let start = moment(pregled.termin.datumIVreme).toDate();
       let end = moment(start).add(pregled.termin.trajanje, 'minutes').toDate();
-      eventList.push({id: pregled.id, title: pregled.opis, start: start, end: end, type: pregled, allDay: false}); 
+      eventList.push({id: pregled.id, title: pregled.opis + " " + pregled.termin.cena + " RSD", start: start, end: end, type: pregled, allDay: false}); 
     });
     return (
       <div className="App">
