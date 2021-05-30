@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-class SestraHeader extends React.Component {
+class OsobljeHeader extends React.Component {
     render() {
         return (
-            <div>
+            <div className="header">
                 <nav>
                     <Link to="/pacijent">Lista Pacijenata</Link>
                     <Link to="/radnikalendar">Radni Kalendar</Link>
@@ -15,4 +15,4 @@ class SestraHeader extends React.Component {
         )
     }
 }
-export default SestraHeader;
+export default OsobljeHeader;

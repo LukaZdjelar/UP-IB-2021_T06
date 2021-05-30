@@ -8,7 +8,7 @@ import TerminService from '../../services/TerminService'
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import PregledService from '../../services/PregledService';
 import SestraComponent from '../SestraComponent';
-import SestraHeader from '../sestra/SestraHeader';
+import OsobljeHeader from '../sestra/OsobljeHeader';
 
 const localizer = momentLocalizer(moment)
 
@@ -33,7 +33,7 @@ class RadniKalendar extends React.Component {
     });
     return (
       <div className="App">
-        <SestraHeader />
+        <OsobljeHeader />
         <Calendar
           localizer={localizer}
           defaultDate={moment().toDate()}
@@ -45,7 +45,7 @@ class RadniKalendar extends React.Component {
             const eventData = eventList.find(ot => ot.id === event.id);
             return eventData;
           }}
-          style={{ height: "70vh" }}
+          style={{ height: "80vh" }}
         />
       </div>
     );
