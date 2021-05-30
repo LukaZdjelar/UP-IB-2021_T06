@@ -13,38 +13,39 @@ import javax.persistence.Table;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name="korisnik")
+@Table(name = "korisnik")
 public class Korisnik {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="korisnik_id", unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "korisnik_id", unique = true, nullable = false)
 	private Integer id;
-	
-	@Column(name="ime", unique=false, nullable=false)
+
+	@Column(name = "ime", unique = false, nullable = false)
 	private String ime;
-	
-	@Column(name="prezime", unique=false, nullable=false)
+
+	@Column(name = "prezime", unique = false, nullable = false)
 	private String prezime;
-	
-	@Column(name="email", unique=false, nullable=false)
+
+	@Column(name = "email", unique = false, nullable = false)
 	private String email;
-	
-	@Column(name="", unique=false, nullable=false)
+
+	@Column(name = "", unique = false, nullable = false)
 	private String lozinka;
-	
+
 	@ManyToOne
-	@JoinColumn(name="adresa_id", referencedColumnName="adresa_id", nullable=false)
+	@JoinColumn(name = "adresa_id", referencedColumnName = "adresa_id", nullable = false)
 	private Adresa adresa;
-	
-	@Column(name="brojtelefona", unique=false, nullable=false)
+
+	@Column(name = "brojtelefona", unique = false, nullable = false)
 	private String brojTelefona;
-	
+
 	public Korisnik() {
-		
+
 	}
 
-	public Korisnik(Integer id, String ime, String prezime, String email, String lozinka, Adresa adresa, String brojTelefona) {
+	public Korisnik(Integer id, String ime, String prezime, String email, String lozinka, Adresa adresa,
+			String brojTelefona) {
 		super();
 		this.id = id;
 		this.ime = ime;
@@ -114,8 +115,7 @@ public class Korisnik {
 	@Override
 	public String toString() {
 		return "Korisnik [id=" + id + ", ime=" + ime + ", prezime=" + prezime + ", email=" + email + ", lozinka="
-				+ lozinka + ", adresa=" + adresa + ", brojTelefona=" + brojTelefona
-				+ "]";
+				+ lozinka + ", adresa=" + adresa + ", brojTelefona=" + brojTelefona + "]";
 	}
 
 	@Override
