@@ -24,6 +24,7 @@ function App() {
           <Route path="/sestra" component = {SestraComponent} exact/>
           <Route path="/termin" component = {TerminComponent} exact/>
           <Route path="/pacijent" component = {PacijentComponent} exact/>
+          <Route path="/osoblje/radnikalendar" component = {RadniKalendar} exact />
           <Route path="/admin/:id" component = {AdminAboutPage} exact/>
       </div>
     </BrowserRouter>

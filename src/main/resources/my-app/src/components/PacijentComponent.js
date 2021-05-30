@@ -1,6 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react'
 import PacijentService from '../services/PacijentService';
+import OsobljeHeader from './sestra/OsobljeHeader';
 
 class PacijentComponent extends React.Component {
     constructor(props) {
@@ -19,13 +20,16 @@ class PacijentComponent extends React.Component {
     render () {
         return (
             <div>
+                <div>
+                    <OsobljeHeader />
+                </div>
                 <h1>Lista svih pacijenata</h1>
                 <table>
                     <thead>
                         <tr>
                             <td>Ime</td>
                             <td>Prezime</td>
-                            <td>Adresa</td>
+                            <td>Email</td>
                             <td>Br. Telefona</td>
                         </tr>
                     </thead>
@@ -36,7 +40,7 @@ class PacijentComponent extends React.Component {
                                 <tr key = {pacijent.id}>
                                     <td>{pacijent.ime}</td>
                                     <td>{pacijent.prezime}</td>
-                                    <td>{pacijent.adresa}</td>
+                                    <td>{pacijent.email}</td>
                                     <td>{pacijent.brojTelefona}</td>
                                 </tr>
                             )

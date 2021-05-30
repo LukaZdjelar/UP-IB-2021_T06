@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-class SestraComponent extends React.Component {
+class OsobljeHeader extends React.Component {
     render() {
         return (
             <div className="header">
@@ -15,4 +15,4 @@ class SestraComponent extends React.Component {
         )
     }
 }
-export default SestraComponent;
+export default OsobljeHeader;
