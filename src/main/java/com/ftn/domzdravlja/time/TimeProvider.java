@@ -1,4 +1,4 @@
-package time;
+package com.ftn.domzdravlja.time;
 
 import java.io.Serializable;
 import java.util.Date;

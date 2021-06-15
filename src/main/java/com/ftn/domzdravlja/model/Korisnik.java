@@ -1,5 +1,8 @@
 package com.ftn.domzdravlja.model;
 
+import java.util.Collection;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,10 +14,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "korisnik")
-public class Korisnik {
+public class Korisnik implements UserDetails{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -142,4 +150,45 @@ public class Korisnik {
 			return false;
 		return true;
 	}
+
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+    }
+
+	@Override
+	public String getPassword() {
+		return lozinka;
+	}
+
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+
+    @JsonIgnore
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+	@Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
 }

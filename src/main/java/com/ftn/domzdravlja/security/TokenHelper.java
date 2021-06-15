@@ -1,4 +1,4 @@
-package security;
+package com.ftn.domzdravlja.security;
 
 import java.util.Date; 
 
@@ -12,7 +12,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import com.ftn.domzdravlja.model.Korisnik;
-import time.TimeProvider;
+import com.ftn.domzdravlja.time.TimeProvider;
 
 @Component
 public class TokenHelper {
@@ -112,6 +112,11 @@ public class TokenHelper {
 
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
         return (lastPasswordReset != null && created.before(lastPasswordReset));
+    }
+    
+    private Date generateExpirationDate() {
+        long expiresIn = EXPIRES_IN;
+        return new Date(timeProvider.now().getTime() + expiresIn * 1000);
     }
 
     public String getToken(HttpServletRequest request) {

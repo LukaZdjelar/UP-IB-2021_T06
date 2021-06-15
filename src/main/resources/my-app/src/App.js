@@ -9,6 +9,7 @@ import TerminComponent from './components/TerminComponent';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProfilPacijentaComponent from './components/ProfilPacijentaComponent';
 import IsotrijaPregledaComponent from './components/IstorijaPregledaComponent';
+import RadniKalendar from './components/sestra/RadniKalendar';
 import AdminTable from './components/admin/AdminTable';
 import AdminDetails from './components/admin/AdminDetails';
 import AdminAboutPage from './pages/AdminAboutPage';
@@ -27,6 +28,7 @@ function App() {
           <Route path="/sestra" component = {SestraComponent} exact/>
           <Route path="/termin" component = {TerminComponent} exact/>
           <Route path="/pacijent" component = {PacijentComponent} exact/>
+          <Route path="/osoblje/radnikalendar" component = {RadniKalendar} exact />
           <Route path="/admin/:id" component = {AdminAboutPage} exact/>
           </Switch>
       </div>
