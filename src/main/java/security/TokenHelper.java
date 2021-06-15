@@ -1,15 +1,17 @@
 package security;
 
-import java.util.Date;
+import java.util.Date; 
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 import com.ftn.domzdravlja.model.Korisnik;
-
 import time.TimeProvider;
 
 @Component
@@ -24,16 +26,11 @@ public class TokenHelper {
     @Value("300")
     private int EXPIRES_IN;
 
-    @Value("600")
-    private int MOBILE_EXPIRES_IN;
-
     @Value("Authorization")
     private String AUTH_HEADER;
 
     static final String AUDIENCE_UNKNOWN = "unknown";
     static final String AUDIENCE_WEB = "web";
-    static final String AUDIENCE_MOBILE = "mobile";
-    static final String AUDIENCE_TABLET = "tablet";
 
     @Autowired
     TimeProvider timeProvider;
@@ -73,13 +70,13 @@ public class TokenHelper {
         return audience;
     }
 
-    public String refreshToken(String token, Device device) {
+    public String refreshToken(String token) {
         String refreshedToken;
         Date a = timeProvider.now();
         try {
             final Claims claims = this.getAllClaimsFromToken(token);
             claims.setIssuedAt(a);
-            refreshedToken = Jwts.builder().setClaims(claims).setExpiration(generateExpirationDate(device))
+            refreshedToken = Jwts.builder().setClaims(claims).setExpiration(generateExpirationDate())
                     .signWith(SIGNATURE_ALGORITHM, SECRET).compact();
         } catch (Exception e) {
             refreshedToken = null;
@@ -93,17 +90,6 @@ public class TokenHelper {
                 .signWith(SIGNATURE_ALGORITHM, SECRET).compact();
     }
 
-    private String generateAudience(Device device) {
-        String audience = AUDIENCE_UNKNOWN;
-        if (device.isNormal()) {
-            audience = AUDIENCE_WEB;
-        } else if (device.isTablet()) {
-            audience = AUDIENCE_TABLET;
-        } else if (device.isMobile()) {
-            audience = AUDIENCE_MOBILE;
-        }
-        return audience;
-    }
 
     private Claims getAllClaimsFromToken(String token) {
         Claims claims;
@@ -115,21 +101,13 @@ public class TokenHelper {
         return claims;
     }
 
-    private Date generateExpirationDate(Device device) {
-        long expiresIn = device.isTablet() || device.isMobile() ? MOBILE_EXPIRES_IN : EXPIRES_IN;
-        return new Date(timeProvider.now().getTime() + expiresIn * 1000);
-    }
-
-    public int getExpiredIn(Device device) {
-        return device.isMobile() || device.isTablet() ? MOBILE_EXPIRES_IN : EXPIRES_IN;
-    }
 
 
-    public Boolean validateToken(String token, KorisnikDetails korisnikDetails) {
+    public Boolean validateToken(String token, Korisnik korisnikDetails) {
         Korisnik korisnik = (Korisnik) korisnikDetails;
         final String email = getEmailFromToken(token);
         final Date created = getIssuedAtDateFromToken(token);
-        return (email != null && email.equals(KorisnikDetails.getEmail()));
+        return (email != null && email.equals(korisnikDetails.getEmail()));
     }
 
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
