@@ -19,7 +19,7 @@ import com.ftn.domzdravlja.model.Klinika;
 import com.ftn.domzdravlja.model.Pacijent;
 import com.ftn.domzdravlja.service.PacijentService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://localhost:3000")
 @Controller
 @RequestMapping("/pacijent")
 public class PacijentController {

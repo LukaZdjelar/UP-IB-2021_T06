@@ -17,7 +17,7 @@ import com.ftn.domzdravlja.model.Pregled;
 import com.ftn.domzdravlja.model.Termin;
 import com.ftn.domzdravlja.service.PregledService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://localhost:3000")
 @Controller
 @RequestMapping(value="/pregled")
 public class PregledController {
