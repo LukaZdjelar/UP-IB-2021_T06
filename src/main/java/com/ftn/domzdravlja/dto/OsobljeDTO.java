@@ -11,6 +11,7 @@ public class OsobljeDTO implements Serializable {
 	private String prezime;
 	private String email;
 	private String brojTelefona;
+	private Double ocena;
 	
 	public OsobljeDTO(Osoblje osoblje) {
 		id=osoblje.getId();
@@ -18,6 +19,7 @@ public class OsobljeDTO implements Serializable {
 		prezime=osoblje.getPrezime();
 		email=osoblje.getEmail();
 		brojTelefona=osoblje.getBrojTelefona();
+		ocena=osoblje.getOcena();
 	}
 	
 	public Integer getId() {
@@ -49,5 +51,13 @@ public class OsobljeDTO implements Serializable {
 	}
 	public void setBrojTelefona(String brojTelefona) {
 		this.brojTelefona = brojTelefona;
+	}
+
+	public Double getOcena() {
+		return ocena;
+	}
+
+	public void setOcena(Double ocena) {
+		this.ocena = ocena;
 	}
 }

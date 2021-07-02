@@ -17,8 +17,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ftn.domzdravlja.dto.AdministratorDTO;
+import com.ftn.domzdravlja.dto.KlinikaDTO;
+import com.ftn.domzdravlja.dto.OsobljeDTO;
+import com.ftn.domzdravlja.dto.PacijentDTO;
 import com.ftn.domzdravlja.model.Administrator;
+import com.ftn.domzdravlja.model.Klinika;
 import com.ftn.domzdravlja.model.Korisnik;
+import com.ftn.domzdravlja.model.Osoblje;
+import com.ftn.domzdravlja.model.Pacijent;
 import com.ftn.domzdravlja.service.AdministratorService;
 
 @CrossOrigin(origins = "http://localhost:3000")

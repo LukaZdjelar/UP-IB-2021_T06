@@ -37,6 +37,7 @@ class ProfilPacijentaComponent extends React.Component {
                         <td>{this.state.ulogovanPacijent.brojTelefona}</td></tr>
                     </tbody>
                     <a href = "/prikazKlinika">Prikaz klinika</a>
+                    <a href = "/IsotrijaPregledaComponent">Istorija pregleda</a>
                 </table>
             </div>
         )

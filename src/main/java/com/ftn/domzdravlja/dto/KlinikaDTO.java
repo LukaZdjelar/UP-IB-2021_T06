@@ -5,17 +5,19 @@ import java.io.Serializable;
 import com.ftn.domzdravlja.model.Adresa;
 import com.ftn.domzdravlja.model.Klinika;
 
-public class KlinikaDTO implements Serializable{
-	
+public class KlinikaDTO implements Serializable {
+
 	private Integer id;
 	private String naziv;
 //	private Adresa adresa;
 	private String opis;
+	private Double ocena;
 
 	public KlinikaDTO(Klinika klinika) {
 		id=klinika.getId();
 		naziv=klinika.getNaziv();
 		opis=klinika.getOpis();
+		ocena=klinika.getOcena();
 	}
 
 	public Integer getId() {
@@ -41,5 +43,13 @@ public class KlinikaDTO implements Serializable{
 	public void setOpis(String opis) {
 		this.opis = opis;
 	}
-	
+
+	public Double getOcena() {
+		return ocena;
+	}
+
+	public void setOcena(Double ocena) {
+		this.ocena = ocena;
+	}
+
 }

@@ -5,13 +5,13 @@ public class LoginAuthenticationRequest {
 	private String password;
 
 	public LoginAuthenticationRequest() {
-	        super();
-	    }
+		super();
+	}
 
 	public LoginAuthenticationRequest(String email, String password) {
-	        this.setEmail(email);
-	        this.setPassword(password);
-	    }
+		this.setEmail(email);
+		this.setPassword(password);
+	}
 
 	public String getEmail() {
 		return this.email;

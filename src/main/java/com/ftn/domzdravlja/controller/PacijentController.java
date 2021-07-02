@@ -1,6 +1,6 @@
 package com.ftn.domzdravlja.controller;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ftn.domzdravlja.dto.KlinikaDTO;
 import com.ftn.domzdravlja.dto.PacijentDTO;
-import com.ftn.domzdravlja.model.Klinika;
 import com.ftn.domzdravlja.model.Pacijent;
 import com.ftn.domzdravlja.service.PacijentService;
 

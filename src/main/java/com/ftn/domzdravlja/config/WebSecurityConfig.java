@@ -1,5 +1,7 @@
 package com.ftn.domzdravlja.config;
 
+import javax.servlet.http.HttpServletResponse; 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import com.ftn.domzdravlja.security.RestAuthenticationEntryPoint;
 import com.ftn.domzdravlja.security.TokenAuthenticationFilter;
 import com.ftn.domzdravlja.security.TokenHelper;
 import com.ftn.domzdravlja.service.CustomUserDetailService;
@@ -34,9 +35,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomUserDetailService jwtUserDetailsService;
-
-    @Autowired
-    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
     @Bean
     @Override
@@ -59,7 +57,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS ).and()
-                .exceptionHandling().authenticationEntryPoint( (AuthenticationEntryPoint) restAuthenticationEntryPoint ).and()
+                .exceptionHandling().authenticationEntryPoint(  (request, response, ex) -> {
+                    response.sendError(
+                            HttpServletResponse.SC_UNAUTHORIZED,
+                            ex.getMessage()
+                        );
+                    } ).and()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers(HttpMethod.POST,"PUTANJE KOJE SVI MOGU").permitAll()
