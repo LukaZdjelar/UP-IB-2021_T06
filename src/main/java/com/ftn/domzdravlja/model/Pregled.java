@@ -81,9 +81,20 @@ public class Pregled {
 	public void setOpis(String opis) {
 		this.opis = opis;
 	}
+	
+	public Set<Recept> getRecepti() {
+		return recepti;
+	}
+
+	public void setRecepti(Set<Recept> recepti) {
+		this.recepti = recepti;
+	}
 
 	@Override
 	public String toString() {
-		return "Pregled [id=" + id + ", termin=" + termin + ", pacijent=" + pacijent + ", opis=" + opis + "]";
+		return "Pregled [id=" + id + ", termin=" + termin + ", pacijent=" + pacijent + ", opis=" + opis + ", recepti="
+				+ recepti + "]";
 	}
+
+	
 }

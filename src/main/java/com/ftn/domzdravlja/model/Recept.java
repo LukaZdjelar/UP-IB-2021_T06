@@ -27,11 +27,13 @@ public class Recept {
 	@Column(name = "overen", unique = false, nullable = false)
 	private boolean overen;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "pregled_id", nullable = false)
 	@JsonIgnore
 	private Pregled pregled;
 
+	public Recept() {}
+	
 	public Recept(Integer id, String text, boolean overen) {
 		super();
 		this.text = text;
