@@ -45,11 +45,11 @@ public class ReceptController {
 	}
 	
 	@PutMapping(value = "/recept/overi/{id}")
-	Public ResponseEntity<Recept> overi(@PathVariable("id") Integer id) {
+	public ResponseEntity<Recept> overi(@PathVariable("id") Integer id) {
 		Recept recept = receptService.findReceptById(id);
 		recept.setOveren(true);
 		receptService.save(recept);
-		return new ResponseEntity<>(recept, HttpStatus.OK)
+		return new ResponseEntity<>(recept, HttpStatus.OK);
 	}
 	
 }
