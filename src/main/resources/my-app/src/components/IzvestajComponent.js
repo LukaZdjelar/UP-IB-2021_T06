@@ -42,7 +42,7 @@ class IzvestajComponent extends React.Component {
                                 klinika => 
                                 <tr key = {klinika.id}>
                                     <td>{klinika.naziv}</td>
-                                    <td>{average(klinika.ocena)}</td>
+                                    <td>{klinika.ocena}</td>
                                 </tr>
                             )
                         }
@@ -51,7 +51,7 @@ class IzvestajComponent extends React.Component {
                                 osoblje => 
                                 <tr key = {osoblje.id}>
                                     <td>{osoblje.ime}</td>
-                                    <td>{average(osoblje.ocena)}</td>
+                                    <td>{osoblje.ocena}</td>
                                 </tr>
                             )
                         }

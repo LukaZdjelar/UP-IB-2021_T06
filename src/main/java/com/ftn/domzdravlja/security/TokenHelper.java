@@ -84,10 +84,14 @@ public class TokenHelper {
         return refreshedToken;
     }
 
-    public String generateToken(String username) {
-        return Jwts.builder().setIssuer(APP_NAME).setSubject(username)
+    public String generateToken(Korisnik korisnik) {
+        return Jwts.builder()
+                .setIssuer(APP_NAME)
+                .setSubject(korisnik.getUsername())
                 .setIssuedAt(timeProvider.now())
-                .signWith(SIGNATURE_ALGORITHM, SECRET).compact();
+                .signWith(SIGNATURE_ALGORITHM, SECRET)
+                .claim("roles", korisnik.getAuthorities())
+                .compact();
     }
 
 

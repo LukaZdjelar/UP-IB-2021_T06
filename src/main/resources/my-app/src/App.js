@@ -7,6 +7,7 @@ import PregledComponent from './components/PregledComponent';
 import SestraComponent from './components/SestraComponent';
 import TerminComponent from './components/TerminComponent';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {NavLink} from "react-router-dom";
 import ProfilPacijentaComponent from './components/ProfilPacijentaComponent';
 import IsotrijaPregledaComponent from './components/IstorijaPregledaComponent';
 import RadniKalendar from './components/sestra/RadniKalendar';
@@ -19,7 +20,7 @@ import Login from './pages/Login';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <div className="App">
         <Switch>
           <Route path="/logovaniPacijent" component = {ProfilPacijentaComponent}/>
@@ -43,7 +44,7 @@ function App() {
           <Route exact path ="/login" component={Login}/>
         </Switch>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 }
 

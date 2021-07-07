@@ -12,12 +12,23 @@ const Login = (props) => {
     const handleLogin = () =>{
         setError(null);
         setLoading(true);
-        axios.post("htpp://localhost:8080/admin",{
+        axios.post("htpp://localhost:8080/domZdravlja/aou/login",{
             email:email,
             password:password
         }).then(response => {
             setLoading(false);
-            setUserSession(response.data.token, response.data.user)
+            setUserSession(response.data.access_token)
+            if(response.data.role.includes("ADMIN")){
+                props.history.push('/admin');
+            }else if(response.data.role.includes("NURSE")){
+                props.history.push('/sestra')
+            }else if(response.data.role.includes("DOCTOR")){
+                props.history.push('/doctor')
+            }else if(response.data.role.includes("PATIENT")){
+                props.history.push('/pacijent')
+            }else if(response.data.role.includes("STAF")){
+                props.history.push('/osoblje')
+            }
             props.history.push('/admin')
             console.log('response >>> ', response)
         }).catch(error => {
@@ -54,6 +65,7 @@ const Login = (props) => {
             <input type='button'
             value={loading ? "Loading ..." : 'Login'}
             disabled={loading}
+            onClick = {handleLogin}
             />
         </div>
 

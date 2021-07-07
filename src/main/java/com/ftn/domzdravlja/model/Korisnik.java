@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -47,6 +48,9 @@ public class Korisnik implements UserDetails{
 
 	@Column(name = "brojtelefona", unique = false, nullable = false)
 	private String brojTelefona;
+
+	@ManyToMany
+	private Set<Role> roles;
 
 	public Korisnik() {
 
@@ -154,7 +158,7 @@ public class Korisnik implements UserDetails{
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		return this.roles;
     }
 
 	@Override
@@ -166,6 +170,14 @@ public class Korisnik implements UserDetails{
 	public String getUsername() {
 		return email;
 	}
+
+	public static String getUserRoles(){
+		String roleNames = "";
+		for(Role role : this.roles){
+			roleNames+=role.getAuthority() + ",";
+		}
+		return roleNames;
+	};
 
 
     @JsonIgnore

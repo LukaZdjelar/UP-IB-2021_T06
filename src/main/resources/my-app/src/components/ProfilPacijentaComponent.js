@@ -21,7 +21,7 @@ class ProfilPacijentaComponent extends React.Component {
             <div>
                 <h1>Prikaz pacijenta: {this.state.ulogovanPacijent.ime}</h1>
                 <table>
-                    <thead>
+                     <thead>
                         <tr>
                             <td>Ime</td>
                             <td>Prezime</td>
