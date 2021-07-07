@@ -12,6 +12,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import AdminTable from './components/admin/AdminTable';
 import AdminDetails from './components/admin/AdminDetails';
 import AdminAboutPage from './pages/AdminAboutPage';
+import ReceptComponent from './components/sestra/ReceptComponent';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
           <Route path="/pacijent" component = {PacijentComponent} exact/>
           <Route path="/osoblje/radnikalendar" component = {RadniKalendar} exact />
           <Route path="/admin/:id" component = {AdminAboutPage} exact/>
+          {/* <Route path="/klinickicentar/recept/overi/:id" component = {receptOvera} exact/> */}
+          <Route path="/recepti" component = {ReceptComponent} exact/>
       </div>
     </BrowserRouter>
   );
