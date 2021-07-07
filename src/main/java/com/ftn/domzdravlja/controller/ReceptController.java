@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import com.ftn.domzdravlja.model.Recept;
 import com.ftn.domzdravlja.service.ReceptService;
 
 @RestController
+@CrossOrigin(origins = "https://localhost:3000")
 @RequestMapping(value = "/recept")
 public class ReceptController {
 
@@ -44,7 +46,7 @@ public class ReceptController {
 		return new ResponseEntity<ReceptDTO>(new ReceptDTO(recept), HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/recept/overi/{id}")
+	@PutMapping(value = "/overi/{id}")
 	public ResponseEntity<Recept> overi(@PathVariable("id") Integer id) {
 		Recept recept = receptService.findReceptById(id);
 		recept.setOveren(true);

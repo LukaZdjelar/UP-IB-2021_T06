@@ -9,7 +9,7 @@ class OsobljeHeader extends React.Component {
                     <Link to="/pacijent">Lista Pacijenata</Link>
                     <Link to="/osoblje/radnikalendar">Radni Kalendar</Link>
                     <Link to="/osoblje/profil">Profil</Link>
-                    <Link to="/osoblje/overavanjeRecepta">Overa Recepta</Link>
+                    <Link to="/recepti">Overa Recepta</Link>
                 </nav>
             </div>
         )

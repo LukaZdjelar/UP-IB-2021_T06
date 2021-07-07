@@ -14,6 +14,9 @@ const localizer = momentLocalizer(moment)
 
 
 class RadniKalendar extends React.Component {
+  
+  
+  
   state = {
       pregledi:[]
   }
@@ -23,6 +26,7 @@ class RadniKalendar extends React.Component {
       this.setState({pregledi: response.data})
     });
   }
+  
   render() {
     const eventList = [];
     this.state.pregledi.forEach((pregled) => {
@@ -31,6 +35,7 @@ class RadniKalendar extends React.Component {
       let end = moment(start).add(pregled.termin.trajanje, 'minutes').toDate();
       eventList.push({id: pregled.id, title: pregled.opis + " " + pregled.termin.cena + " RSD", start: start, end: end, type: pregled, allDay: false}); 
     });
+    
     return (
       <div className="App">
         <OsobljeHeader />
@@ -43,12 +48,15 @@ class RadniKalendar extends React.Component {
           events={eventList}
           eventPropGetter={event => {
             const eventData = eventList.find(ot => ot.id === event.id);
+            console.log(eventData);
             return eventData;
           }}
           style={{ height: "80vh" }}
         />
       </div>
     );
+
+    
   }
 }
 //     constructor(props) {
