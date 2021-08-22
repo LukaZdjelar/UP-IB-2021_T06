@@ -171,7 +171,7 @@ public class Korisnik implements UserDetails{
 		return email;
 	}
 
-	public static String getUserRoles(){
+	public String getUserRoles(){
 		String roleNames = "";
 		for(Role role : this.roles){
 			roleNames+=role.getAuthority() + ",";

@@ -16,7 +16,10 @@ public class RefreshToken {
     private String token;
 
     @Column
-    private Instant expiresIn;
+    private Instant expiryDate;
+
+    @Column
+    private Integer userId;
 
     public Long getId() {
         return id;
@@ -34,11 +37,19 @@ public class RefreshToken {
         this.token = token;
     }
 
-    public Instant getExpiresIn() {
-        return expiresIn;
+    public Instant getExpiryDate() {
+        return expiryDate;
     }
 
-    public void setExpiresIn(Instant expiresIn) {
-        this.expiresIn = expiresIn;
+    public void setExpiryDate(Instant expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

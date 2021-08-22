@@ -6,16 +6,13 @@ public class KorisnikTokenStatedDTO {
 
 	private String refreshToken;
 
-    private String role;
-
     public KorisnikTokenStatedDTO() {
         this.access_token = null;
     }
 
-    public KorisnikTokenStatedDTO(String access_token, String refreshToken, String role) {
+    public KorisnikTokenStatedDTO(String access_token, String refreshToken) {
         this.access_token = access_token;
         this.refreshToken = refreshToken;
-        this.role = role;
     }
 
     public String getAccess_token() {
@@ -32,13 +29,5 @@ public class KorisnikTokenStatedDTO {
 
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
-    }
-
-    public String getRole() {
-        return role;
-    }
-    
-    public void setRole(String role) {
-        this.role = role;
     }
 }

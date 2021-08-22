@@ -1,11 +1,11 @@
 package com.ftn.domzdravlja.controller;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.joda.time.Instant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,31 +27,38 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.domzdravlja.controller.LoginController.PasswordChanger;
 import com.ftn.domzdravlja.dto.KorisnikTokenStatedDTO;
+import com.ftn.domzdravlja.dto.RefreshTokenRequestDto;
+import com.ftn.domzdravlja.exception.TokenRefreshException;
 import com.ftn.domzdravlja.model.Korisnik;
 import com.ftn.domzdravlja.model.RefreshToken;
 import com.ftn.domzdravlja.repository.RefreshTokenRepository;
 import com.ftn.domzdravlja.security.LoginAuthenticationRequest;
 import com.ftn.domzdravlja.security.TokenHelper;
 import com.ftn.domzdravlja.service.CustomUserDetailService;
+import com.ftn.domzdravlja.service.KorisnikService;
+import com.ftn.domzdravlja.service.RefreshTokenService;
 @RestController
 @RequestMapping(value = "domZdravlja/aou")
+@CrossOrigin("*")
 public class LoginController{
 
-    @Autowired
     TokenHelper tokenHelper;
-
-    @Autowired
-    private RefreshTokenRepository refreshTokenRepository;
-    
-    @Autowired
     private AuthenticationManager authenticationManager;
-
-    @Autowired
     private CustomUserDetailService userDetailsService;
+    private RefreshTokenService refreshTokenService;
+    private KorisnikService korisnikService;
+    
 
+    public LoginController(TokenHelper tokenHelper, AuthenticationManager authenticationManager,
+                           CustomUserDetailService userDetailsService, RefreshTokenService refreshTokenService, KorisnikService korisnikService) {
+        this.tokenHelper = tokenHelper;
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
+        this.refreshTokenService = refreshTokenService;
+        this.korisnikService = korisnikService;
+    }
 
     @PostMapping(value = "/login")
-    @PreAuthorize("hasAnyRole('ADMIN','PATIENT', 'DOCTOR', 'NURSE', 'STAFF')")
     public ResponseEntity<?> createAuthenticationToken(
             @RequestBody LoginAuthenticationRequest authenticationRequest,
             HttpServletResponse response
@@ -66,9 +74,10 @@ public class LoginController{
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         Korisnik korisnik = (Korisnik)authentication.getPrincipal();
-        String jws = tokenHelper.generateToken( korisnik);
-        String refreshToken = "" ;
-        return ResponseEntity.ok(new KorisnikTokenStatedDTO(jws, refreshToken, Korisnik.getUserRoles()));
+        String jwt = tokenHelper.generateToken( korisnik);
+        String refreshToken = refreshTokenService.createRefreshToken(korisnik.getId()).getToken();
+
+        return ResponseEntity.ok(new KorisnikTokenStatedDTO(jwt, refreshToken));
     }
 
     @RequestMapping(value = "/change-password", method = RequestMethod.POST)
@@ -80,13 +89,24 @@ public class LoginController{
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("{refreshToken}")
-    public ResponseEntity<KorisnikTokenStatedDTO> generateJWTFromRefreshToken(@PathVariable String refreshToken, @AuthenticationPrincipal Korisnik user){
-        RefreshToken refToken = refreshTokenRepository.findByToken(refreshToken);
-        if(!(refToken.getExpiresIn() <= Instant.now())){
-            String jws = tokenHelper.generateToken(user);
-            return ResponseEntity.ok(new KorisnikTokenStatedDTO(jws, refreshToken,Korisnik.getUserRoles()));
+    @PostMapping("refreshToken")
+    public ResponseEntity<KorisnikTokenStatedDTO> generateJWTFromRefreshToken(@RequestBody RefreshTokenRequestDto tokenRequestDto){
+        RefreshToken refToken = refreshTokenService.findByToken(tokenRequestDto.getRefreshToken());
+
+        if (refToken != null){
+            try {
+                refToken = refreshTokenService.verifyExpiration(refToken);
+                Korisnik korisnik = korisnikService.findById(refToken.getUserId());
+                String jwt = tokenHelper.generateToken( korisnik);
+                return ResponseEntity.ok(new KorisnikTokenStatedDTO(jwt, refToken.getToken()));
+
+            }catch (TokenRefreshException exception){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+
         }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     static class PasswordChanger {

@@ -1,20 +1,36 @@
+import jwt from 'jwt-decode'
+
 export const getUser = () => {
     const userStr = sessionStorage.getItem("user");
     if(userStr) return JSON.parse(userStr);
     else return null;
 }
 
-export const getToken = () => {
-    return sessionStorage.getItem("token") || null;
+export const getAccessToken = () => {
+    return localStorage.getItem("accessToken") || null;
 }
 
-export const getUserSession = (token,user) => {
-    sessionStorage.getItem('token',token);
-    sessionStorage.setItem('user',JSON.stringify(user));
-
+export const getRefreshToken = () => {
+    return localStorage.getItem("refreshToken") || null;
 }
 
+
+export const SetAccessToken = (accessToken) =>{
+    localStorage.setItem('accessToken',accessToken);
+}
+
+export const SetRefreshToken = (refreshToken) =>{
+    localStorage.setItem('refreshToken',refreshToken);
+}
 export const removeUserSession = () => {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("user");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+}
+
+export const checkForRole = (role) => {
+    const token = localStorage.getItem("accessToken");
+
+    var decoded = jwt.decode(token);
+    console.log(decoded);
+
 }

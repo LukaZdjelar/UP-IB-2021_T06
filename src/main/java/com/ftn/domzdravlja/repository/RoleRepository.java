@@ -6,6 +6,6 @@ import com.ftn.domzdravlja.model.Role;
 
 public interface RoleRepository extends JpaRepository<Role, String> {
 	
-	Role findUserByRole (String name);
+	Role findByName (String name);
 
 }
