@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import com.ftn.domzdravlja.security.CustomAuthenticationProvider;
 import com.ftn.domzdravlja.security.TokenAuthenticationFilter;
 import com.ftn.domzdravlja.security.TokenHelper;
 import com.ftn.domzdravlja.service.CustomUserDetailService;
@@ -28,6 +29,10 @@ import com.ftn.domzdravlja.service.CustomUserDetailService;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	
+	@Autowired
+	CustomAuthenticationProvider customAuthenticationProvider;
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -41,6 +46,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
+	
+	@Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(customAuthenticationProvider);
+    }
+
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -55,11 +66,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
 				.authenticationEntryPoint((request, response, ex) -> {
 					response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
-				}).and().authorizeRequests().antMatchers("/domZdravlja/ao/**").permitAll()
-				.antMatchers(HttpMethod.POST, "/admin").permitAll()
-				.antMatchers(HttpMethod.POST, "PUTANJE KOJE SVI MOGU").permitAll()
-				.antMatchers(HttpMethod.PUT, "/admin/edit").permitAll()
-				.antMatchers(HttpMethod.GET, "PUTANJE KOJE SVI MOGU").permitAll().anyRequest().authenticated().and()
+				}).and().authorizeRequests().antMatchers(HttpMethod.POST, "/klinickicentar/**").permitAll()
+				.antMatchers(HttpMethod.POST, "/domZdravlja/auth/login").permitAll().anyRequest().authenticated().and()
 				.addFilterBefore(new TokenAuthenticationFilter(tokenHelper, jwtUserDetailsService),
 						BasicAuthenticationFilter.class)
 
@@ -68,8 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers(HttpMethod.POST, "/api/auth/login", "/api/admin", "/api/tags/add/**",
-				"/api/users/image"
+		web.ignoring().antMatchers(HttpMethod.POST,"domZdravlja/auth/login"
 
 		);
 		web.ignoring().antMatchers(HttpMethod.PUT, "/api/users/role/**");

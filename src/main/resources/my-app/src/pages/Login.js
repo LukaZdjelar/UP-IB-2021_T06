@@ -15,9 +15,9 @@ function Login (props){
     const handleLogin = () =>{
         setError(null);
         setLoading(true);
-        axios.post("/domZdravlja/aou",{
-            email:email,
-            password:password
+        axios.post("/klinickicentar/domZdravlja/auth/login",{
+            email:email.value,
+            password:password.value
         }).then(response => {
 
             setLoading(false);

@@ -37,80 +37,76 @@ import com.ftn.domzdravlja.security.TokenHelper;
 import com.ftn.domzdravlja.service.CustomUserDetailService;
 import com.ftn.domzdravlja.service.KorisnikService;
 import com.ftn.domzdravlja.service.RefreshTokenService;
+
 @RestController
-@RequestMapping(value = "domZdravlja/aou")
-@CrossOrigin("*")
-public class LoginController{
+@RequestMapping(value = "domZdravlja/auth")
+public class LoginController {
 
-    TokenHelper tokenHelper;
-    private AuthenticationManager authenticationManager;
-    private CustomUserDetailService userDetailsService;
-    private RefreshTokenService refreshTokenService;
-    private KorisnikService korisnikService;
-    
+	TokenHelper tokenHelper;
+	private AuthenticationManager authenticationManager;
+	private CustomUserDetailService userDetailsService;
+	private RefreshTokenService refreshTokenService;
+	private KorisnikService korisnikService;
 
-    public LoginController(TokenHelper tokenHelper, AuthenticationManager authenticationManager,
-                           CustomUserDetailService userDetailsService, RefreshTokenService refreshTokenService, KorisnikService korisnikService) {
-        this.tokenHelper = tokenHelper;
-        this.authenticationManager = authenticationManager;
-        this.userDetailsService = userDetailsService;
-        this.refreshTokenService = refreshTokenService;
-        this.korisnikService = korisnikService;
-    }
+	public LoginController(TokenHelper tokenHelper, AuthenticationManager authenticationManager,
+			CustomUserDetailService userDetailsService, RefreshTokenService refreshTokenService,
+			KorisnikService korisnikService) {
+		this.tokenHelper = tokenHelper;
+		this.authenticationManager = authenticationManager;
+		this.userDetailsService = userDetailsService;
+		this.refreshTokenService = refreshTokenService;
+		this.korisnikService = korisnikService;
+	}
 
-    @PostMapping(value = "/login")
-    public ResponseEntity<?> createAuthenticationToken(
-            @RequestBody LoginAuthenticationRequest authenticationRequest,
-            HttpServletResponse response
-    ) throws AuthenticationException, IOException {
+	@PostMapping(value = "/login")
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginAuthenticationRequest authenticationRequest,
+			HttpServletResponse response) throws AuthenticationException, IOException {
 
-        final Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        authenticationRequest.getEmail(),
-                        authenticationRequest.getPassword()
-                )
-        );
+		final Authentication authentication = authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(),
+						authenticationRequest.getPassword()));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        Korisnik korisnik = (Korisnik)authentication.getPrincipal();
-        String jwt = tokenHelper.generateToken( korisnik);
-        String refreshToken = refreshTokenService.createRefreshToken(korisnik.getId()).getToken();
+		Korisnik korisnik = (Korisnik) authentication.getPrincipal();
+		String jwt = tokenHelper.generateToken(korisnik);
+		String refreshToken = refreshTokenService.createRefreshToken(korisnik.getId()).getToken();
 
-        return ResponseEntity.ok(new KorisnikTokenStatedDTO(jwt, refreshToken));
-    }
+		return ResponseEntity.ok(new KorisnikTokenStatedDTO(jwt, refreshToken));
+	}
 
-    @RequestMapping(value = "/change-password", method = RequestMethod.POST)
-    public ResponseEntity<?> changePassword(@RequestBody PasswordChanger passwordChanger) {
-        Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-        Korisnik ulogovan = (Korisnik) authentication.getPrincipal();
+	@RequestMapping(value = "/change-password", method = RequestMethod.POST)
+	public ResponseEntity<?> changePassword(@RequestBody PasswordChanger passwordChanger) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Korisnik ulogovan = (Korisnik) authentication.getPrincipal();
 
-        userDetailsService.changePassword(passwordChanger.oldPassword, passwordChanger.newPassword);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+		userDetailsService.changePassword(passwordChanger.oldPassword, passwordChanger.newPassword);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 
-    @PostMapping("refreshToken")
-    public ResponseEntity<KorisnikTokenStatedDTO> generateJWTFromRefreshToken(@RequestBody RefreshTokenRequestDto tokenRequestDto){
-        RefreshToken refToken = refreshTokenService.findByToken(tokenRequestDto.getRefreshToken());
+	@PostMapping("refreshToken")
+	public ResponseEntity<KorisnikTokenStatedDTO> generateJWTFromRefreshToken(
+			@RequestBody RefreshTokenRequestDto tokenRequestDto) {
+		RefreshToken refToken = refreshTokenService.findByToken(tokenRequestDto.getRefreshToken());
 
-        if (refToken != null){
-            try {
-                refToken = refreshTokenService.verifyExpiration(refToken);
-                Korisnik korisnik = korisnikService.findById(refToken.getUserId());
-                String jwt = tokenHelper.generateToken( korisnik);
-                return ResponseEntity.ok(new KorisnikTokenStatedDTO(jwt, refToken.getToken()));
+		if (refToken != null) {
+			try {
+				refToken = refreshTokenService.verifyExpiration(refToken);
+				Korisnik korisnik = korisnikService.findById(refToken.getUserId());
+				String jwt = tokenHelper.generateToken(korisnik);
+				return ResponseEntity.ok(new KorisnikTokenStatedDTO(jwt, refToken.getToken()));
 
-            }catch (TokenRefreshException exception){
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-            }
+			} catch (TokenRefreshException exception) {
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+			}
 
-        }
+		}
 
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    }
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+	}
 
-    static class PasswordChanger {
-        public String oldPassword;
-        public String newPassword;
-    }
+	static class PasswordChanger {
+		public String oldPassword;
+		public String newPassword;
+	}
 }
