@@ -67,6 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.authenticationEntryPoint((request, response, ex) -> {
 					response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
 				}).and().authorizeRequests().antMatchers(HttpMethod.POST, "/klinickicentar/**").permitAll()
+				.antMatchers(HttpMethod.OPTIONS).permitAll()
 				.antMatchers(HttpMethod.POST, "/domZdravlja/auth/login").permitAll().anyRequest().authenticated().and()
 				.addFilterBefore(new TokenAuthenticationFilter(tokenHelper, jwtUserDetailsService),
 						BasicAuthenticationFilter.class)
