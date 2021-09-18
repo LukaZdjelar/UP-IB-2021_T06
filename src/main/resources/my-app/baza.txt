@@ -1,0 +1,26 @@
+insert into adresa values(1,'11', 'Srbija', 'Indjija', 'Cara Dusana');
+insert into klinika values(1, 'klinika', 'aaaa', 1);
+
+insert into adresa values(2,'24', 'Srbija', 'Indjija', 'Njegoseva');
+insert into korisnik values(1, 1, '1231231', 'mejl', 'ime', 'lozinka', 'prezime', 2);
+insert into administrator values(1,1,1);
+
+insert into adresa values(3,'19', 'Srbija', 'Ruma', 'Glavna');
+insert into korisnik values(2, 1, '022456190', 'mail@mail.com', 'Marko', 'lozz', 'Nikolic', 3);
+insert into osoblje values(1, 2, 1);
+
+insert into adresa values(4,'24', 'Srbija', 'Nova Pazova', 'Karadjordjeva');
+insert into klinika values(2, 'klinika nova pazova', 'aaaa', 4);
+
+insert into adresa values(5,'84', 'Srbija', 'Novi Sad', 'Kralja Petra');
+insert into korisnik values(3, 0,'021451190', 'nidza@gmail.com', 'Nikola', '123456', 'Filipovic', 5);
+insert into pacijent values('12345678901', 3);
+
+
+insert into termin values(1, 3000, '2021.06.02 12:00:00', 30, 2, 2);
+insert into termin values(2, 500, '2021.05.16 13:00:00', 45, 2, 2);
+
+insert into pregled values(1, "Opis prvog pregleda", 3, 1);
+insert into recept values(2, 0, "Text drugog recepta", 1);
+insert into recept values(1, 0, "Text prvog Recepta", 1);
+insert into recept values(3, 0, "Text prvog Recepta", 1);
