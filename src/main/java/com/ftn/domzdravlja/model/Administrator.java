@@ -21,12 +21,16 @@ public class Administrator extends Korisnik {
 		super();
 	}
 
+	
+
 	public Administrator(Integer id, String ime, String prezime, String email, String lozinka, Adresa adresa,
-			String brojTelefona, Boolean adminKlinickogCentra, Klinika klinika) {
-		super(id, ime, prezime, email, lozinka, adresa, brojTelefona);
+			String brojTelefona, boolean approved, Boolean adminKlinickogCentra, Klinika klinika) {
+		super(id, ime, prezime, email, lozinka, adresa, brojTelefona, approved);
 		this.adminKlinickogCentra = adminKlinickogCentra;
 		this.klinika = klinika;
 	}
+
+
 
 	public Boolean getAdminKlinickogCentra() {
 		return adminKlinickogCentra;

@@ -15,11 +15,15 @@ public class Pacijent extends Korisnik {
 		super();
 	}
 
+	
+
 	public Pacijent(Integer id, String ime, String prezime, String email, String lozinka, Adresa adresa,
-			String brojTelefona, String lBO) {
-		super(id, ime, prezime, email, lozinka, adresa, brojTelefona);
-		this.LBO = lBO;
+			String brojTelefona, boolean approved, String lBO) {
+		super(id, ime, prezime, email, lozinka, adresa, brojTelefona, approved);
+		LBO = lBO;
 	}
+
+
 
 	public String getLBO() {
 		return LBO;
