@@ -16,7 +16,7 @@ class AdminDetails extends React.Component{
             this.setState({
                 id:response.data.id,
                 ime:response.data.ime,
-                prezime:response.data.prezime
+                prezime:response.data.prezime 
             })
         })
     }

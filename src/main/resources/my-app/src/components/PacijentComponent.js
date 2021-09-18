@@ -27,10 +27,10 @@ class PacijentComponent extends React.Component {
                 <table>
                     <thead>
                         <tr>
-                            <td>Ime</td>
-                            <td>Prezime</td>
-                            <td>Email</td>
-                            <td>Br. Telefona</td>
+                            <th>Ime</th>
+                            <th>Prezime</th>
+                            <th>Email</th>
+                            <th>Br. Telefona</th>
                         </tr>
                     </thead>
                     <tbody>

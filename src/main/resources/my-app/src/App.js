@@ -13,6 +13,7 @@ import AdminTable from './components/admin/AdminTable';
 import AdminDetails from './components/admin/AdminDetails';
 import AdminAboutPage from './pages/AdminAboutPage';
 import ReceptComponent from './components/sestra/ReceptComponent';
+import SestraProfil from './components/sestra/SestraProfil';
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
           <Route path="/pacijent" component = {PacijentComponent} exact/>
           <Route path="/osoblje/radnikalendar" component = {RadniKalendar} exact />
           <Route path="/admin/:id" component = {AdminAboutPage} exact/>
+          <Route path="/osoblje" component = {SestraProfil} exact/>
+          {/* <Route path="/osoblje/:id" component = {SestraAboutPage} exact/> */}
           {/* <Route path="/klinickicentar/recept/overi/:id" component = {receptOvera} exact/> */}
           <Route path="/recepti" component = {ReceptComponent} exact/>
       </div>
