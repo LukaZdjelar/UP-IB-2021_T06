@@ -32,3 +32,21 @@ nav a {
 nav a:visited {
   color: white;
 }
+
+table, td, th {  
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 15px;
+}
