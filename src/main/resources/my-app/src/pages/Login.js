@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { getAccessToken, getRefreshToken, SetAccessToken, SetRefreshToken, removeUserSession , checkForRole} from '../components/Utils/Common';
+import { getAccessToken, getRefreshToken, SetAccessToken, SetRefreshToken, removeUserSession , getUserRoles} from '../components/Utils/Common';
 
 function Login (props){
 
@@ -23,17 +23,17 @@ function Login (props){
             setLoading(false);
             SetAccessToken(response.data.access_token)
             SetRefreshToken(response.data.refreshToken)
-            checkForRole("ADMIN");
+            let userRoles  = getUserRoles("ADMIN");
 
-            if(response.data.role.includes("ADMIN")){
+            if(userRoles.includes("ADMIN")){
                 props.history.push('/admin');
-            }else if(response.data.role.includes("NURSE")){
+            }else if(userRoles.includes("NURSE")){
                 props.history.push('/sestra')
-            }else if(response.data.role.includes("DOCTOR")){
+            }else if(userRoles.includes("DOCTOR")){
                 props.history.push('/doctor')
-            }else if(response.data.role.includes("PATIENT")){
+            }else if(userRoles.includes("PATIENT")){
                 props.history.push('/pacijent')
-            }else if(response.data.role.includes("STAF")){
+            }else if(userRoles.includes("STAF")){
                 props.history.push('/osoblje')
             }
             props.history.push('/admin')

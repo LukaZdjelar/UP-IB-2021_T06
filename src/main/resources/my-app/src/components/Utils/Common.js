@@ -1,4 +1,4 @@
-import jwt from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
 
 export const getUser = () => {
     const userStr = sessionStorage.getItem("user");
@@ -27,10 +27,12 @@ export const removeUserSession = () => {
     localStorage.removeItem("refreshToken");
 }
 
-export const checkForRole = (role) => {
+export const getUserRoles = () => {
     const token = localStorage.getItem("accessToken");
 
-    var decoded = jwt.decode(token);
-    console.log(decoded);
-
+    var decoded = jwtDecode(token);
+    if(decoded) {
+        return decoded.roles?.map(r => r?.authority)
+    }
+    return [];
 }
