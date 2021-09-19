@@ -17,6 +17,9 @@ import AdminAboutPage from './pages/AdminAboutPage';
 import IzvestajComponent from './components/IzvestajComponent';
 import index from './index';
 import Login from './pages/Login';
+import ReceptComponent from './components/sestra/ReceptComponent';
+import SestraProfil from './components/sestra/SestraProfil';
+import OdobrenjeRegistrovanihComponent from './components/OdobrenjeRegistrovanihComponent';
 
 function App() {
   return (
@@ -37,6 +40,11 @@ function App() {
           <Route path="/admin/:id" component = {AdminAboutPage} exact/>
           <NavLink activeClassName = "active" to = "/login">Login <small>Acces with token only</small></NavLink>
           </Switch>
+          <Route path="/osoblje" component = {SestraProfil} exact/>
+          <Route path="/admin/approve" component = {OdobrenjeRegistrovanihComponent} exact/>
+          {/* <Route path="/osoblje/:id" component = {SestraAboutPage} exact/> */}
+          {/* <Route path="/klinickicentar/recept/overi/:id" component = {receptOvera} exact/> */}
+          <Route path="/recepti" component = {ReceptComponent} exact/>
       </div>
       <div className = 'content'>
         <Switch>

@@ -38,10 +38,13 @@ public class Korisnik implements UserDetails{
 
 	@Column(name = "email", unique = false, nullable = false)
 	private String email;
-
-	@Column(name = "", unique = false, nullable = false)
+	
+	@Column(name="lozinka", unique=false, nullable=false)
 	private String lozinka;
-
+	
+	@Column(name="approved", unique=false, nullable=false)
+	private boolean approved;
+	
 	@ManyToOne
 	@JoinColumn(name = "adresa_id", referencedColumnName = "adresa_id", nullable = false)
 	private Adresa adresa;
@@ -56,8 +59,7 @@ public class Korisnik implements UserDetails{
 
 	}
 
-	public Korisnik(Integer id, String ime, String prezime, String email, String lozinka, Adresa adresa,
-			String brojTelefona) {
+	public Korisnik(Integer id, String ime, String prezime, String email, String lozinka, Adresa adresa, String brojTelefona, boolean approved) {
 		super();
 		this.id = id;
 		this.ime = ime;
@@ -66,6 +68,7 @@ public class Korisnik implements UserDetails{
 		this.lozinka = lozinka;
 		this.adresa = adresa;
 		this.brojTelefona = brojTelefona;
+		this.approved = approved;
 	}
 
 	public Integer getId() {
@@ -128,6 +131,15 @@ public class Korisnik implements UserDetails{
 	public String toString() {
 		return "Korisnik [id=" + id + ", ime=" + ime + ", prezime=" + prezime + ", email=" + email + ", lozinka="
 				+ lozinka + ", adresa=" + adresa + ", brojTelefona=" + brojTelefona + "]";
+	}
+	
+
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
 	}
 
 	@Override

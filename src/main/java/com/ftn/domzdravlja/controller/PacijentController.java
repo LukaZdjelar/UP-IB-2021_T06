@@ -3,6 +3,8 @@ package com.ftn.domzdravlja.controller;
 import java.util.ArrayList; 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,7 @@ import com.ftn.domzdravlja.dto.PacijentDTO;
 import com.ftn.domzdravlja.model.Pacijent;
 import com.ftn.domzdravlja.service.PacijentService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://localhost:3000")
 @Controller
 @RequestMapping("/pacijent")
 @PreAuthorize("hasRole('PATIENT')")
@@ -47,6 +49,28 @@ public class PacijentController {
 		Pacijent p = pacijentService.save(pacijent);
 		
 		return new ResponseEntity<PacijentDTO>(new PacijentDTO(p), HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/waitingapproval")
+	public ResponseEntity<List<PacijentDTO>> getAll() {
+		List<Pacijent> pacijenti = pacijentService.findAll();
+		
+		List<PacijentDTO> dtoList = new ArrayList<PacijentDTO>();
+		
+		for (Pacijent pacijent : pacijenti) {
+			if(pacijent.isApproved() == false )
+				dtoList.add(new PacijentDTO(pacijent));
+		}
+		
+		return new ResponseEntity<>(dtoList, HttpStatus.OK);
+	}
+	@PutMapping(value="/approve/{id}")
+	public ResponseEntity<Pacijent> approve(@PathVariable ("id") Integer id) {
+		Pacijent pacijent = pacijentService.findPacijentById(id);
+		System.out.println(pacijent);
+		pacijent.setApproved(true);
+		pacijentService.save(pacijent);
+		return new ResponseEntity<>(pacijent, HttpStatus.OK);
 	}
 	
 	@GetMapping

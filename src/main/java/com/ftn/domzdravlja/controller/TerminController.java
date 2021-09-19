@@ -22,7 +22,7 @@ import com.ftn.domzdravlja.model.Klinika;
 import com.ftn.domzdravlja.model.Termin;
 import com.ftn.domzdravlja.service.TerminService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://localhost:3000")
 @Controller
 @RequestMapping("/termin")
 public class TerminController {

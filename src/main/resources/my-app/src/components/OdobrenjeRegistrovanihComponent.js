@@ -1,9 +1,17 @@
-import userEvent from '@testing-library/user-event';
 import React from 'react'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+import OsobljeHeader from './sestra/OsobljeHeader'
 import PacijentService from '../services/PacijentService';
-import OsobljeHeader from './sestra/OsobljeHeader';
 
-class PacijentComponent extends React.Component {
+const odobri = async(id) => {
+    console.log(id);
+    await fetch(`https://localhost:8080/klinickicentar/pacijent/approve/${id}`, {
+        method: 'PUT'
+    });
+}
+
+class OdobrenjeRegistrovanihComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,18 +20,17 @@ class PacijentComponent extends React.Component {
     }
 
     componentDidMount() {
-        PacijentService.getPacijenti().then((response) => {
+        PacijentService.getUnapprovedPacijenti().then((response) => {
             this.setState({pacijenti: response.data})
         });
     }
-
     render () {
         return (
             <div>
                 <div>
                     <OsobljeHeader />
                 </div>
-                <h1>Lista svih pacijenata</h1>
+                <h1>Lista Svih Novoregistrovanih Korisnika</h1>
                 <table>
                     <thead>
                         <tr>
@@ -42,6 +49,7 @@ class PacijentComponent extends React.Component {
                                     <td>{pacijent.prezime}</td>
                                     <td>{pacijent.email}</td>
                                     <td>{pacijent.brojTelefona}</td>
+                                    <button onClick={() => odobri(pacijent.id)}>Odobri Registraciju</button>
                                 </tr>
                             )
                         }
@@ -51,4 +59,5 @@ class PacijentComponent extends React.Component {
         )
     }
 }
-export default PacijentComponent;
+
+export default OdobrenjeRegistrovanihComponent

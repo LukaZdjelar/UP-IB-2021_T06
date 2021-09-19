@@ -24,13 +24,17 @@ public class Osoblje extends Korisnik {
 		super();
 	}
 
+	
+
 	public Osoblje(Integer id, String ime, String prezime, String email, String lozinka, Adresa adresa,
-			String brojTelefona, Boolean lekar, Klinika klinika, Double ocena) {
-		super(id, ime, prezime, email, lozinka, adresa, brojTelefona);
+			String brojTelefona, boolean approved, Boolean lekar, Klinika klinika) {
+		super(id, ime, prezime, email, lozinka, adresa, brojTelefona, approved);
 		this.lekar = lekar;
 		this.klinika = klinika;
 		this.ocena = ocena;
 	}
+
+
 
 	public Boolean getLekar() {
 		return lekar;
