@@ -10,34 +10,38 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="klinika")
+@Table(name = "klinika")
 public class Klinika {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="klinika_id", unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "klinika_id", unique = true, nullable = false)
 	private Integer id;
-	
-	@Column(name="naziv", unique=false, nullable=false)
+
+	@Column(name = "naziv", unique = false, nullable = false)
 	private String naziv;
-	
+
+	@Column(name = "ocena", unique = false, nullable = false)
+	private Double ocena;
+
 	@ManyToOne
-	@JoinColumn(name="adresa_id", referencedColumnName="adresa_id", nullable=false)
+	@JoinColumn(name = "adresa_id", referencedColumnName = "adresa_id", nullable = false)
 	private Adresa adresa;
-	
-	@Column(name="opis", unique=false, nullable=false)
+
+	@Column(name = "opis", unique = false, nullable = false)
 	private String opis;
-	
+
 	public Klinika() {
-		
+
 	}
 
-	public Klinika(Integer id, String naziv, Adresa adresa, String opis) {
+	public Klinika(Integer id, String naziv, Adresa adresa, String opis, Double ocena) {
 		super();
 		this.id = id;
 		this.naziv = naziv;
 		this.adresa = adresa;
 		this.opis = opis;
+		this.ocena = ocena;
 	}
 
 	public Integer getId() {
@@ -72,9 +76,17 @@ public class Klinika {
 		this.opis = opis;
 	}
 
+	public Double getOcena() {
+		return ocena;
+	}
+
+	public void setOcena(Double ocena) {
+		this.ocena = ocena;
+	}
+
 	@Override
 	public String toString() {
 		return "Klinika [id=" + id + ", naziv=" + naziv + ", adresa=" + adresa + ", opis=" + opis + "]";
 	}
-	
+
 }

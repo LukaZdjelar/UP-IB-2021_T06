@@ -1,5 +1,6 @@
 package com.ftn.domzdravlja.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,12 @@ public class TerminServiceImpl implements TerminService {
 	@Override
 	public Termin findTerminById(Integer id) {
 		Termin termin = terminRepository.findTerminById(id);
+		return termin;
+	}
+
+	@Override
+	public Termin findAllTermini(Date pocetni, Date krajnji) {
+		Termin termin = ((TerminService) terminRepository).findAllTermini(pocetni,krajnji);
 		return termin;
 	}
 

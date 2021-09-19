@@ -1,5 +1,8 @@
 package com.ftn.domzdravlja.model;
 
+import java.util.Collection;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,26 +11,32 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name="korisnik")
-public class Korisnik {
-	
+@Table(name = "korisnik")
+public class Korisnik implements UserDetails{
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="korisnik_id", unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "korisnik_id", unique = true, nullable = false)
 	private Integer id;
-	
-	@Column(name="ime", unique=false, nullable=false)
+
+	@Column(name = "ime", unique = false, nullable = false)
 	private String ime;
-	
-	@Column(name="prezime", unique=false, nullable=false)
+
+	@Column(name = "prezime", unique = false, nullable = false)
 	private String prezime;
-	
-	@Column(name="email", unique=false, nullable=false)
+
+	@Column(name = "email", unique = false, nullable = false)
 	private String email;
 	
 	@Column(name="lozinka", unique=false, nullable=false)
@@ -37,14 +46,17 @@ public class Korisnik {
 	private boolean approved;
 	
 	@ManyToOne
-	@JoinColumn(name="adresa_id", referencedColumnName="adresa_id", nullable=false)
+	@JoinColumn(name = "adresa_id", referencedColumnName = "adresa_id", nullable = false)
 	private Adresa adresa;
-	
-	@Column(name="brojtelefona", unique=false, nullable=false)
+
+	@Column(name = "brojtelefona", unique = false, nullable = false)
 	private String brojTelefona;
-	
+
+	@ManyToMany
+	private Set<Role> roles;
+
 	public Korisnik() {
-		
+
 	}
 
 	public Korisnik(Integer id, String ime, String prezime, String email, String lozinka, Adresa adresa, String brojTelefona, boolean approved) {
@@ -118,8 +130,7 @@ public class Korisnik {
 	@Override
 	public String toString() {
 		return "Korisnik [id=" + id + ", ime=" + ime + ", prezime=" + prezime + ", email=" + email + ", lozinka="
-				+ lozinka + ", adresa=" + adresa + ", brojTelefona=" + brojTelefona
-				+ "]";
+				+ lozinka + ", adresa=" + adresa + ", brojTelefona=" + brojTelefona + "]";
 	}
 	
 
@@ -155,4 +166,53 @@ public class Korisnik {
 			return false;
 		return true;
 	}
+
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return this.roles;
+    }
+
+	@Override
+	public String getPassword() {
+		return lozinka;
+	}
+
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+	public String getUserRoles(){
+		String roleNames = "";
+		for(Role role : this.roles){
+			roleNames+=role.getAuthority() + ",";
+		}
+		return roleNames;
+	};
+
+
+    @JsonIgnore
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+	@Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
 }

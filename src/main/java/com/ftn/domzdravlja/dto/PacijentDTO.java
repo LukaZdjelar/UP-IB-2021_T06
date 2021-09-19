@@ -11,6 +11,7 @@ public class PacijentDTO implements Serializable {
 	private String prezime;
 	private String email;
 	private String brojTelefona;
+	
 
 	public PacijentDTO(Pacijent pacijent) {
 		id=pacijent.getId();
