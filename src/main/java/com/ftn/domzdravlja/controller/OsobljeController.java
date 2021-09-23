@@ -17,7 +17,7 @@ import com.ftn.domzdravlja.service.OsobljeService;
 
 @CrossOrigin(origins = "https://localhost:3000")
 @Controller
-@RequestMapping("/osoblje")
+@RequestMapping("domZdravlja/osoblje")
 @PreAuthorize("hasRole('STAFF')")
 public class OsobljeController {
 

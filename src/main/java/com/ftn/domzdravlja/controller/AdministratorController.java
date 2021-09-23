@@ -29,7 +29,7 @@ import com.ftn.domzdravlja.service.AdministratorService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("domZdravlja/admin")
 public class AdministratorController {
 	
 	@Autowired

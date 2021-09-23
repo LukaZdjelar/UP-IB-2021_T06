@@ -18,7 +18,7 @@ import com.ftn.domzdravlja.service.KlinikaService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @Controller
-@RequestMapping(value="/klinika")
+@RequestMapping(value="domZdravlja/klinika")
 public class KlinikaController {
 	
 	@Autowired

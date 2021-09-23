@@ -1,4 +1,5 @@
-import jwtDecode from 'jwt-decode'
+import jwtDecode from 'jwt-decode';
+import axios from 'axios';
 
 export const getUser = () => {
     const userStr = sessionStorage.getItem("user");
@@ -35,4 +36,14 @@ export const getUserRoles = () => {
         return decoded.roles?.map(r => r?.authority)
     }
     return [];
+}
+
+export const refreshToken = async() => {
+    const rt = localStorage.getItem("refreshToken");
+    axios.post("/domZdravlja/auth/refreshToken",{"refreshToken":rt}).then(res =>{
+        let at = res.data?.access_token;
+        let nrt = res.data?.refreshToken;
+        SetAccessToken(at);
+        SetRefreshToken(nrt);
+    })
 }

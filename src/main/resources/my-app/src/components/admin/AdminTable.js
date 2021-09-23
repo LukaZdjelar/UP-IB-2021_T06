@@ -9,7 +9,7 @@ class AdminTable extends React.Component{
         }
 
     componentDidMount() {
-        axios.get("http://localhost:8080/klinickicentar/admin").then(response=>{
+        axios.get("/domZdravlja/admin").then(response=>{
             this.setState({
                 admini:response.data
             })

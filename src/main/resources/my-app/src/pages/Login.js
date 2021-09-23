@@ -15,7 +15,7 @@ function Login (props){
     const handleLogin = () =>{
         setError(null);
         setLoading(true);
-        axios.post("http://localhost:8080/domZdravlja/auth/login",{
+        axios.post("/domZdravlja/auth/login",{
             email:email.value,
             password:password.value
         }).then(response => {

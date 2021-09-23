@@ -11,7 +11,7 @@ class AdminDetails extends React.Component{
     }
 
     componentDidMount() {
-        axios.get("http://localhost:8080/klinickicentar/admin/"+this.props.match.params.id)
+        axios.get("/domZdravlja/admin/"+this.props.match.params.id)
         .then(response => {
             this.setState({
                 id:response.data.id,
