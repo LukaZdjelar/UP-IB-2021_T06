@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const USERS_REST_API_URL = "https://localhost:8080/klinickicentar/recept";
+const USERS_REST_API_URL = "/domZdravlja/recept";
 
 class ReceptService {
     getRecepti() {

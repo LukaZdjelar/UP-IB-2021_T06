@@ -22,7 +22,7 @@ import com.ftn.domzdravlja.service.PacijentService;
 
 @CrossOrigin(origins = "https://localhost:3000")
 @Controller
-@RequestMapping("/pacijent")
+@RequestMapping("domZdravlja/pacijent")
 @PreAuthorize("hasRole('PATIENT')")
 public class PacijentController {
 	

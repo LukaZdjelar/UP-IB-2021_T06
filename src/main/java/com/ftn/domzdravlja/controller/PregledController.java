@@ -19,7 +19,7 @@ import com.ftn.domzdravlja.service.PregledService;
 
 @CrossOrigin(origins = "https://localhost:3000")
 @Controller
-@RequestMapping(value="/pregled")
+@RequestMapping(value="domZdravlja/pregled")
 public class PregledController {
 	
 	@Autowired

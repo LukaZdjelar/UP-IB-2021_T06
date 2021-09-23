@@ -24,7 +24,7 @@ import com.ftn.domzdravlja.service.TerminService;
 
 @CrossOrigin(origins = "https://localhost:3000")
 @Controller
-@RequestMapping("/termin")
+@RequestMapping("domZdravlja/termin")
 public class TerminController {
 
 	@Autowired

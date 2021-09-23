@@ -30,10 +30,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider  {
 	     Korisnik korisnik = userService.findKorisnik(username);
 	     
 	     if (korisnik == null) {
-	    	 throw new RuntimeException("Invalid username or password.");
+	    	 throw new RuntimeException("Invalid username.");
 	     }
 	     if(password == null) {
-	    	 throw new RuntimeException("Invalid username or password.");
+	    	 throw new RuntimeException("Invalid password.");
 	     }
 	     boolean matches = password.equals(korisnik.getPassword());
 	     if (!matches) {

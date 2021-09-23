@@ -2,9 +2,9 @@ const {createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = app => {
   app.use(
-    "/klinickicentar/*",
+    "/domZdravlja/*",
     createProxyMiddleware({
-      target: "http://localhost:8080",
+      target: "https://localhost:8080/klinickicentar/",
       changeOrigin: true
     })
   );

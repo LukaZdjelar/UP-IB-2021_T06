@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const KLINIKA_REST_API_URL = "http://localhost:8080/klinickicentar/klinika";
+const KLINIKA_REST_API_URL = "/domZdravlja/klinika";
 
 class KlinikaServis {
     getKlinike() {

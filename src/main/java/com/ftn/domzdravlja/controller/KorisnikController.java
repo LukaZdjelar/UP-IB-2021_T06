@@ -9,7 +9,7 @@ import com.ftn.domzdravlja.service.KorisnikService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @Controller
-@RequestMapping("/index")
+@RequestMapping("domZdravlja/index")
 public class KorisnikController {
 
 	@Autowired

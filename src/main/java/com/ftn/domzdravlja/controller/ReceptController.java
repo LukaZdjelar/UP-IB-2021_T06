@@ -20,7 +20,7 @@ import com.ftn.domzdravlja.service.ReceptService;
 
 @RestController
 @CrossOrigin(origins = "https://localhost:3000")
-@RequestMapping(value = "/recept")
+@RequestMapping(value = "domZdravlja/recept")
 public class ReceptController {
 
 	@Autowired

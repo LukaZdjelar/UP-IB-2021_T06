@@ -44,4 +44,5 @@
     "@types/react": "^17.0.5",
     "http-proxy-middleware": "^2.0.1"
   }
+
 }

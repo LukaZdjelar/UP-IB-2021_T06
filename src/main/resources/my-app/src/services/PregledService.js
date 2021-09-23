@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const USERS_REST_API_URL = "https://localhost:8080/klinickicentar/pregled";
+const USERS_REST_API_URL = "/domZdravlja/pregled";
 
 class PregledService {
     getPregledi() {
