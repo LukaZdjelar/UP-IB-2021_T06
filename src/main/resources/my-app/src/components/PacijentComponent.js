@@ -18,6 +18,7 @@ class PacijentComponent extends React.Component {
     }
 
     render () {
+        console.log(this.state.pacijenti);
         return (
             <div>
                 <div>

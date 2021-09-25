@@ -15,7 +15,7 @@ function Login (props){
     const handleLogin = () =>{
         setError(null);
         setLoading(true);
-        axios.post("/domZdravlja/auth/login",{
+        axios.post("domZdravlja/auth/login",{
             email:email.value,
             password:password.value
         }).then(response => {
@@ -25,19 +25,19 @@ function Login (props){
             SetRefreshToken(response.data.refreshToken)
             let userRoles  = getUserRoles("ADMIN");
 
-            if(userRoles.includes("ADMIN")){
-                props.history.push('/admin');
-            }else if(userRoles.includes("NURSE")){
+            if(userRoles.includes("ROLE_ADMIN")){
+                props.history.push('/admin/approve');
+            }else if(userRoles.includes("ROLE_NURSE")){
                 props.history.push('/sestra')
-            }else if(userRoles.includes("DOCTOR")){
+            }else if(userRoles.includes("ROLE_DOCTOR")){
                 props.history.push('/doctor')
-            }else if(userRoles.includes("PATIENT")){
+            }else if(userRoles.includes("ROLE_PATIENT")){
                 props.history.push('/pacijent')
-            }else if(userRoles.includes("STAF")){
+            }else if(userRoles.includes("ROLE_STAFF")){
                 props.history.push('/osoblje')
             }
-            props.history.push('/admin')
-            console.log('response >>> ', response)
+            // props.history.push('/admin');
+            console.log('response >>> ', response);
         }).catch(error => {
             setLoading(false);
             if(error?.response?.status === 401 || error?.response?.status === 400){
@@ -46,7 +46,7 @@ function Login (props){
             else{
                 setError("Something went wrong. Please try again later.");
             }
-            console.log('response >>> ', error.response)
+            // console.log('response >>> ', error.response)
         });
     }
 

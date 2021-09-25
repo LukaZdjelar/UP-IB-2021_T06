@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,7 @@ public class TerminController {
 	@Autowired
 	private TerminService terminService;
 
+	@PreAuthorize("hasRole('ROLE_DOCTOR')")
 	@PostMapping("/create")
 	public ResponseEntity<TerminDTO> create(Termin termin, String DIVString) {
 
@@ -44,6 +46,7 @@ public class TerminController {
 	}
 
 	@GetMapping
+	@PreAuthorize("hasAnyRole('ROLE_PACIJENT', 'ROLE_STAFF', 'ROLE_ADMIN')")
 	public ResponseEntity<List<TerminDTO>> findAll() {
 		List<Termin> termini = terminService.findAll();
 

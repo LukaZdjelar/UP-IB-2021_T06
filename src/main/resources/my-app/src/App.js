@@ -3,7 +3,7 @@ import './App.css';
 import PacijentComponent from './components/PacijentComponent';
 import DoktorComponent from './components/DoktorComponent';
 import KlinikaComponent from './components/KlinikaComponent';
-import PregledComponent from './components/PregledComponent';
+// import PregledComponent from './components/PregledComponent';
 import SestraComponent from './components/SestraComponent';
 import TerminComponent from './components/TerminComponent';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -31,7 +31,7 @@ function App() {
           <Route path="/doktor" component = {DoktorComponent} exact/>
           <Route path="/admin" component = {AdminTable} exact/>
           <Route path="/klinika" component = {KlinikaComponent} exact/>
-          <Route path="/pregled" component = {PregledComponent} exact/>
+          {/* <Route path="/pregled" component = {PregledComponent} exact/> */}
           <Route path="/sestra" component = {SestraComponent} exact/>
           <Route path="/termin" component = {TerminComponent} exact/>
           <Route path="/pacijent" component = {PacijentComponent} exact/>
@@ -45,6 +45,7 @@ function App() {
           {/* <Route path="/osoblje/:id" component = {SestraAboutPage} exact/> */}
           {/* <Route path="/klinickicentar/recept/overi/:id" component = {receptOvera} exact/> */}
           <Route path="/recepti" component = {ReceptComponent} exact/>
+          {/* <Route path="/doktor/pregledi" component = {PregledComponent} exact /> */}
       </div>
       <div className = 'content'>
         <Switch>

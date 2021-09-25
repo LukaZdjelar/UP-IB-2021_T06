@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ public class ReceptController {
 	ReceptService receptService;
 	
 	@GetMapping
+	@PreAuthorize("hasRole('ROLE_NURSE')")
 	public ResponseEntity<List<ReceptDTO>> findAll() {
 		
 		List<Recept> recepti = receptService.findAll();
@@ -45,7 +47,7 @@ public class ReceptController {
 		receptService.save(recept);
 		return new ResponseEntity<ReceptDTO>(new ReceptDTO(recept), HttpStatus.OK);
 	}
-	
+	@PreAuthorize("hasRole('ROLE_NURSE')")
 	@PutMapping(value = "/overi/{id}")
 	public ResponseEntity<Recept> overi(@PathVariable("id") Integer id) {
 		Recept recept = receptService.findReceptById(id);
