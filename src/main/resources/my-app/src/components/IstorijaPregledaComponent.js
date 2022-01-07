@@ -1,6 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react'
 import PregledService from '../services/PregledService';
+import PacijentHeader from './PacijentHeader';
 
 class PregledComponent extends React.Component {
     constructor(props) {
@@ -16,11 +17,12 @@ class PregledComponent extends React.Component {
         });
     }
 
-    render () {
+    
+    render(){
         console.log(this.state.pregledi);
-        return (
+        return(
             <div>
-                <h1>Istorija pregleda</h1>
+                <PacijentHeader /> 
                 <table>
                     <thead>
                         <tr>
@@ -40,8 +42,10 @@ class PregledComponent extends React.Component {
                         }
                     </tbody>
                 </table>
+                
             </div>
         )
     }
+    
 }
 export default PregledComponent;

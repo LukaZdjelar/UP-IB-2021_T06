@@ -40,6 +40,7 @@ function App() {
           <Route path="/admin/:id" component = {AdminAboutPage} exact/>
           <NavLink activeClassName = "active" to = "/login">Login <small>Acces with token only</small></NavLink>
           </Switch>
+          <Route path="/pacijentProfil" component = {ProfilPacijentaComponent} exact/>
           <Route path="/osoblje" component = {SestraProfil} exact/>
           <Route path="/admin/approve" component = {OdobrenjeRegistrovanihComponent} exact/>
           {/* <Route path="/osoblje/:id" component = {SestraAboutPage} exact/> */}
