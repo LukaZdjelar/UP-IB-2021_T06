@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,7 @@ public class KlinikaController {
 	KlinikaService klinikaService;
 
 	@PutMapping("/edit")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<KlinikaDTO> update(Klinika klinika){
 		
 		Klinika nadji = klinikaService.findKlinikaById(klinika.getId());

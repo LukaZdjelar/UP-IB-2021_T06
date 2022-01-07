@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,7 @@ public class AdministratorController {
 	AdministratorService administratorService;
 	
 	@GetMapping
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<List<AdministratorDTO>> findAll(){
 		
 		List<Administrator> administratori = administratorService.findAll();
@@ -47,7 +49,7 @@ public class AdministratorController {
 		
 		return new ResponseEntity<>(dtoList, HttpStatus.OK);
 	}
-
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value="/{id}")
 	public ResponseEntity<AdministratorDTO> get(@PathVariable("id") Integer id) {
 		
@@ -56,7 +58,7 @@ public class AdministratorController {
 		return new ResponseEntity<AdministratorDTO>(new AdministratorDTO(a), HttpStatus.OK);
 		
 	}
-	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping(value="/edit")
 	public ResponseEntity<AdministratorDTO> update(Administrator administrator){
 		

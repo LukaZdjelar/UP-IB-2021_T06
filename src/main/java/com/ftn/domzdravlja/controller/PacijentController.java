@@ -23,13 +23,11 @@ import com.ftn.domzdravlja.service.PacijentService;
 @CrossOrigin(origins = "https://localhost:3000")
 @Controller
 @RequestMapping("domZdravlja/pacijent")
-@PreAuthorize("hasRole('PATIENT')")
 public class PacijentController {
 	
 	@Autowired
 	PacijentService pacijentService;
-
-	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PACIJENT', 'ROLE_STAFF')")
 	@GetMapping(value="/{id}")
 	public ResponseEntity<PacijentDTO> get(@PathVariable("id") Integer id) {
 		
@@ -50,7 +48,7 @@ public class PacijentController {
 		
 		return new ResponseEntity<PacijentDTO>(new PacijentDTO(p), HttpStatus.OK);
 	}
-	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value="/waitingapproval")
 	public ResponseEntity<List<PacijentDTO>> getAll() {
 		List<Pacijent> pacijenti = pacijentService.findAll();
@@ -64,6 +62,7 @@ public class PacijentController {
 		
 		return new ResponseEntity<>(dtoList, HttpStatus.OK);
 	}
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping(value="/approve/{id}")
 	public ResponseEntity<Pacijent> approve(@PathVariable ("id") Integer id) {
 		Pacijent pacijent = pacijentService.findPacijentById(id);

@@ -6,17 +6,18 @@ class PregledComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pregled:[]
+            pregledi:[]
         }
     }
 
     componentDidMount() {
-        PregledService.getPregled().then((response) => {
-            this.setState({pregled: response.data})
+        PregledService.getPregledi().then((response) => {
+            this.setState({pregledi: response.data})
         });
     }
 
     render () {
+        console.log(this.state.pregledi);
         return (
             <div>
                 <h1>Istorija pregleda</h1>
@@ -29,7 +30,7 @@ class PregledComponent extends React.Component {
                     </thead>
                     <tbody>
                         {
-                            this.state.pregldedi.map (
+                            this.state.pregledi.map (
                                 pregled => 
                                 <tr key = {pregled.id}>
                                     <td>{pregled.termin}</td>

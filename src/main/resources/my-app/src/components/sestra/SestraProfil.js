@@ -14,7 +14,7 @@ class SestraProfil extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("/domZdravlja/osoblje/"+2)
+        axios.get("/domZdravlja/osoblje/"+3)
         .then(response => {
             console.log(response);
             this.setState({

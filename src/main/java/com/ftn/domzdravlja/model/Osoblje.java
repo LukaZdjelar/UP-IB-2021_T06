@@ -17,8 +17,6 @@ public class Osoblje extends Korisnik {
 	@JoinColumn(name = "klinika_id", referencedColumnName = "klinika_id", nullable = false)
 	private Klinika klinika;
 
-	@Column(name="ocena", unique=false, nullable=false)
-	private Double ocena;
 
 	public Osoblje() {
 		super();
@@ -31,7 +29,6 @@ public class Osoblje extends Korisnik {
 		super(id, ime, prezime, email, lozinka, adresa, brojTelefona, approved);
 		this.lekar = lekar;
 		this.klinika = klinika;
-		this.ocena = ocena;
 	}
 
 
@@ -52,13 +49,6 @@ public class Osoblje extends Korisnik {
 		this.klinika = klinika;
 	}
 
-	public Double getOcena() {
-		return ocena;
-	}
-
-	public void setOcena(Double ocena) {
-		this.ocena = ocena;
-	}
 
 	@Override
 	public String toString() {

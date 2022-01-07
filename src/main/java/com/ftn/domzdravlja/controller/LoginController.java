@@ -40,13 +40,17 @@ import com.ftn.domzdravlja.service.RefreshTokenService;
 
 @RestController
 @RequestMapping(value = "domZdravlja/auth")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://localhost:3000")
 public class LoginController {
 
 	TokenHelper tokenHelper;
+	@Autowired
 	private AuthenticationManager authenticationManager;
+	@Autowired
 	private CustomUserDetailService userDetailsService;
+	@Autowired
 	private RefreshTokenService refreshTokenService;
+	@Autowired
 	private KorisnikService korisnikService;
 
 	public LoginController(TokenHelper tokenHelper, AuthenticationManager authenticationManager,
