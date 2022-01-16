@@ -32,7 +32,7 @@ function Login (props){
             }else if(userRoles.includes("ROLE_DOCTOR")){
                 props.history.push('/doctor')
             }else if(userRoles.includes("ROLE_PATIENT")){
-                props.history.push('/pacijent')
+                props.history.push('/pacijentProfil')
             }else if(userRoles.includes("ROLE_STAFF")){
                 props.history.push('/osoblje')
             }

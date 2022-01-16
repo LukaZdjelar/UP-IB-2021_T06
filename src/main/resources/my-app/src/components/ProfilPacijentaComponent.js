@@ -1,44 +1,45 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react'
+import PacijentHeader from './PacijentHeader';
 import PacijentService from '../services/PacijentService';
+import axios from 'axios';
+
+
 
 class ProfilPacijentaComponent extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            ulogovanPacijent:{}
-        }
+    state = {
+        ime:"",
+        prezime:"",
+        email:"",
+        brojTelefona:""
     }
 
     componentDidMount() {
-        PacijentService.getPacijentById(3).then((response) => {
-            this.setState({ulogovanPacijent: response.data})
-        });
+        axios.get("/domZdravlja/pacijent/"+4)
+        .then(response => {
+            console.log(response);
+            this.setState({
+                ime:response.data.ime,
+                prezime:response.data.prezime,
+                email:response.data.email,
+                brojTelefona:response.data.brojTelefona
+            })
+        })
     }
-
-    render () {
-        return (
+    render(){
+        return(
             <div>
-                <h1>Prikaz pacijenta: {this.state.ulogovanPacijent.ime}</h1>
-                <table>
-                     <thead>
-                        <tr>
-                            <td>Ime</td>
-                            <td>Prezime</td>
-                            <td>Email</td>
-                            <td>Br. Telefona</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <td>{this.state.ulogovanPacijent.ime}</td>
-                        <td>{this.state.ulogovanPacijent.prezime}</td>
-                        <td>{this.state.ulogovanPacijent.Email}</td>
-                        <td>{this.state.ulogovanPacijent.brojTelefona}</td></tr>
-                    </tbody>
-                    <a href = "/prikazKlinika">Prikaz klinika</a>
-                    <a href = "/IsotrijaPregledaComponent">Istorija pregleda</a>
-                </table>
+                <div>
+                    <PacijentHeader/>
+                </div>
+                <h1>Profil </h1>
+                <img src="https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" width="200px;" height="150px;" alt="profile icon" />
+                <div className="ProfilDiv">
+                    <p>Name: {this.state.ime}</p>
+                    <p>Prezime: {this.state.prezime}</p>
+                    <p>Email: {this.state.email}</p>
+                    <p>Broj Telefona: {this.state.brojTelefona}</p>
+                </div>  
             </div>
         )
     }

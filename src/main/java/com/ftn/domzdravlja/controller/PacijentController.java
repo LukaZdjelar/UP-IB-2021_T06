@@ -27,7 +27,7 @@ public class PacijentController {
 	
 	@Autowired
 	PacijentService pacijentService;
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PACIJENT', 'ROLE_STAFF')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PATIENT', 'ROLE_STAFF')")
 	@GetMapping(value="/{id}")
 	public ResponseEntity<PacijentDTO> get(@PathVariable("id") Integer id) {
 		
