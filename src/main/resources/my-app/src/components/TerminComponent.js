@@ -1,6 +1,7 @@
 import TerminService from "../services/TerminService";
 import axios from "axios";
 import React from "react";
+import PacijentHeader from "./PacijentHeader";
 
 class TerminComponent extends React.Component {
     constructor(props) {
@@ -11,15 +12,24 @@ class TerminComponent extends React.Component {
     }
 
     componentDidMount() {
-        TerminService.getTermini.then((response) => {
+        let doktorId = this.props.match.params.doktorId;
+        TerminService.getTerminiByDoktor(doktorId).then((response) => {
             this.setState({termin: response.data})
         });
+    }
+
+    zakaziPregled(termin){
+        
+
     }
 
     render () {
         console.log(this.termin.osoblje);
         return (
             <div>
+                <div>
+                    <PacijentHeader/>
+                </div>
                 <h1>Lista svih termina</h1>
                 <table>
                     <thead>
@@ -37,6 +47,7 @@ class TerminComponent extends React.Component {
                                     <td>{termin.datumivreme}</td>
                                     <td>{termin.cena}</td>
                                     <td>{termin.trajanje}</td>
+                                    <button onClick={this.zakaziPregled(termin)}>Zakazi pregled</button>
                                 </tr>
                             )
                         }

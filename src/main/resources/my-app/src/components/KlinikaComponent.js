@@ -12,6 +12,7 @@ function  KlinikaComponent () {
         lokacija:"",
         ocena:0
     });
+    
 
     const [klinike, setKlinike] = useState([]);
 
@@ -82,7 +83,7 @@ function  KlinikaComponent () {
                             klinike.map (
                                 klinika => 
                                 <tr key = {klinika.id}>
-                                    <td>{klinika.naziv}</td>
+                                    <a href={`/doktor/${klinika.id}`} onClick={()=>{localStorage.setItem("klinika",klinika.id)}}><td>{klinika.naziv}</td></a>
                                     <td>{klinika.opis}</td>
                                     <td>{klinika.ocena}</td>
                                 </tr>

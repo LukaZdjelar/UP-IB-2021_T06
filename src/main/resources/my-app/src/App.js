@@ -20,6 +20,7 @@ import Login from './pages/Login';
 import ReceptComponent from './components/sestra/ReceptComponent';
 import SestraProfil from './components/sestra/SestraProfil';
 import OdobrenjeRegistrovanihComponent from './components/OdobrenjeRegistrovanihComponent';
+import DoktorPrikaz from './components/DoktorPrikaz';
 
 function App() {
   return (
@@ -32,13 +33,15 @@ function App() {
           <Route path="/admin" component = {AdminTable} exact/>
           <Route path="/klinika" component = {KlinikaComponent} exact/>
           {/* <Route path="/pregled" component = {PregledComponent} exact/> */}
+          <Route path="/doktor/:klinikaId" component = {DoktorPrikaz} exact/>
           <Route path="/sestra" component = {SestraComponent} exact/>
-          <Route path="/termin" component = {TerminComponent} exact/>
+          <Route path="/termin/:doktorId" component = {TerminComponent} exact/>
           <Route path="/pacijent" component = {PacijentComponent} exact/>
           <Route path="/pacijentProfil" component = {ProfilPacijentaComponent} exact/>
           <Route path="/osoblje/radnikalendar" component = {RadniKalendar} exact />
           <Route path="/admin/izvestaj" component = {IzvestajComponent} exact />
           <Route path="/admin/:id" component = {AdminAboutPage} exact/>
+          <Route path="/pregled" component = {IsotrijaPregledaComponent} exact/>
           <NavLink activeClassName = "active" to = "/login">Login <small>Acces with token only</small></NavLink>
           </Switch>
           <Route path="/osoblje" component = {SestraProfil} exact/>

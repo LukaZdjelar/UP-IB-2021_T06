@@ -1,5 +1,8 @@
 package com.ftn.domzdravlja.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ftn.domzdravlja.dto.OsobljeDTO;
+import com.ftn.domzdravlja.model.Klinika;
 import com.ftn.domzdravlja.model.Osoblje;
 import com.ftn.domzdravlja.service.OsobljeService;
 
@@ -30,6 +34,19 @@ public class OsobljeController {
 		Osoblje o = osobljeService.findOsobljeById(id);
 		
 		return new ResponseEntity<OsobljeDTO>(new OsobljeDTO(o), HttpStatus.OK);
+		
+	}
+	
+	@GetMapping(value="/klinika/{id}")
+	public ResponseEntity<List<OsobljeDTO>> getByKlinika(@PathVariable("id") Integer id) {
+		
+		List<Osoblje> osobljeList = osobljeService.getOsobljeByKlinika(id);
+		List<OsobljeDTO> dtoList = new ArrayList<OsobljeDTO>();
+		for(Osoblje o: osobljeList) {
+			dtoList.add(new OsobljeDTO(o));
+		}
+		
+		return new ResponseEntity<List<OsobljeDTO>>(dtoList, HttpStatus.OK);
 		
 	}
 	

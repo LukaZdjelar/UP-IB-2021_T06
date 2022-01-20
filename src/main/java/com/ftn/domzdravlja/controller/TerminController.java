@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ftn.domzdravlja.dto.KlinikaDTO;
 import com.ftn.domzdravlja.dto.TerminDTO;
-import com.ftn.domzdravlja.model.Klinika;
 import com.ftn.domzdravlja.model.Termin;
 import com.ftn.domzdravlja.service.TerminService;
 
@@ -77,6 +75,19 @@ public class TerminController {
 		}
 		
 		return new ResponseEntity<>(terminList, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/doktor/{id}")
+	public ResponseEntity<List<TerminDTO>> getByLekar(@PathVariable("id") Integer id) {
+		
+		List<Termin> doktorList = terminService.getTerminByLekar(id);
+		List<TerminDTO> dtoList = new ArrayList<TerminDTO>();
+		for(Termin t: doktorList) {
+			dtoList.add(new TerminDTO(t));
+		}
+		
+		return new ResponseEntity<List<TerminDTO>>(dtoList, HttpStatus.OK);
+		
 	}
 
 }

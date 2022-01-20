@@ -3,6 +3,7 @@ package com.ftn.domzdravlja.service;
 import java.util.Date;
 import java.util.List;
 
+import com.ftn.domzdravlja.model.Osoblje;
 import com.ftn.domzdravlja.model.Termin;
 
 public interface TerminService {
@@ -14,4 +15,7 @@ public interface TerminService {
 	Termin findTerminById(Integer id);
 	
 	Termin findAllTermini(Date pocetni, Date krajnji);
+	
+	List<Termin> getTerminByLekar(Integer doktorId);
+
 }
