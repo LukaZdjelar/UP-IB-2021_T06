@@ -2,6 +2,8 @@ import TerminService from "../services/TerminService";
 import axios from "axios";
 import React from "react";
 import PacijentHeader from "./PacijentHeader";
+import PregledService from "../services/PregledService";
+import {rou} from 'react-router-dom';
 
 class TerminComponent extends React.Component {
     constructor(props) {
@@ -19,12 +21,15 @@ class TerminComponent extends React.Component {
     }
 
     zakaziPregled(termin){
-        
+        let isConfirmed = window.confirm("Da li zelite da zakazete ovaj pregled?");
+        if(isConfirmed) {
+            PregledService.savePregled(termin.id);
+            this.props.history.push('/pacijentProfil')
+        }
 
     }
 
     render () {
-        console.log(this.termin.osoblje);
         return (
             <div>
                 <div>
@@ -44,10 +49,10 @@ class TerminComponent extends React.Component {
                             this.state.termin.map (
                                 termin => 
                                 <tr key = {termin.id}>
-                                    <td>{termin.datumivreme}</td>
+                                    <td>{termin.datumIVreme}</td>
                                     <td>{termin.cena}</td>
                                     <td>{termin.trajanje}</td>
-                                    <button onClick={this.zakaziPregled(termin)}>Zakazi pregled</button>
+                                    <button onClick={() =>{this.zakaziPregled(termin)}}>Zakazi pregled</button>
                                 </tr>
                             )
                         }

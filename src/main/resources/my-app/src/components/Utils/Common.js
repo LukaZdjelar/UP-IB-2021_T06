@@ -38,6 +38,16 @@ export const getUserRoles = () => {
     return [];
 }
 
+export const getUserId = () => {
+    const token = localStorage.getItem("accessToken");
+
+    var decoded = jwtDecode(token);
+    if(decoded) {
+        return decoded.userId
+    }
+    return 0;
+}
+
 export const refreshToken = async() => {
     const rt = localStorage.getItem("refreshToken");
     axios.post("/domZdravlja/auth/refreshToken",{"refreshToken":rt}).then(res =>{

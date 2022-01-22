@@ -51,20 +51,22 @@ function Login (props){
     }
 
 
-    return(        <div>
-        Login<br/> <br/>
-        <div>
+    return(   
+    
+    <div className='login'> 
+        <h2>Login</h2>
+        <div className='emailInput'>
             <label>Email</label>
-            <input type="text" {...email} autoComplete="new-password" />
+            <input placeholder='Enter your email' type="text" {...email} autoComplete="new-password" />
         </div>
-        <div>
+        <div className='passwordInput'>
             <label>Password</label>
-            <input type="password" {...password} autoComplete="new-password"/>
+            <input  placeholder='Enter your password' type="password" {...password} autoComplete="new-password"/>
         </div>
         <div>
             {error && <div className='error'>{error}</div>}
 
-            <input type="button" value={loading ? 'Loading...' : 'Login'} onClick={handleLogin} disabled={loading} /><br />
+            <input type="button" id='btnLogin' value={loading ? 'Loading...' : 'Login'} onClick={handleLogin} disabled={loading} />
         </div>
 
     </div>);

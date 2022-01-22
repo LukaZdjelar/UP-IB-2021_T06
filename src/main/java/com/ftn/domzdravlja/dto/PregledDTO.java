@@ -9,36 +9,46 @@ import com.ftn.domzdravlja.model.Termin;
 
 public class PregledDTO implements Serializable{
 	
-	private Termin termin;
-	private Pacijent pacijent;
+	private TerminDTO termin;
+	private PacijentDTO pacijent;
 	private String opis;
 	
 	
 	public PregledDTO(Pregled pregled) {
-		termin=pregled.getTermin();
-		pacijent=pregled.getPacijent();
+		termin= new TerminDTO(pregled.getTermin());
+		pacijent=new PacijentDTO(pregled.getPacijent());
 		opis=pregled.getOpis();
 	}
 
 
-	public Termin getTermin() {
+
+
+	public TerminDTO getTermin() {
 		return termin;
 	}
 
 
-	public void setTermin(Termin termin) {
+
+
+	public void setTermin(TerminDTO termin) {
 		this.termin = termin;
 	}
 
 
-	public Pacijent getPacijent() {
+
+
+	public PacijentDTO getPacijent() {
 		return pacijent;
 	}
 
 
-	public void setPacijent(Pacijent pacijent) {
+
+
+	public void setPacijent(PacijentDTO pacijent) {
 		this.pacijent = pacijent;
 	}
+
+
 
 
 	public String getOpis() {

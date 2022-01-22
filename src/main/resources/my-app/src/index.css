@@ -64,3 +64,95 @@ button:hover {
   color: white;
   transition: 0.2s ease-in;
 }
+
+.login {
+  margin-left: 35%;
+  padding-top: 20px;
+  margin-top: 7%;
+  width: 500px;
+  height: auto;
+  box-shadow: 0 5px 5px 2px rgb(0 0 0 / 17%);
+}
+
+.login h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 30px;
+}
+
+.login label {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  color:#000f33;
+  font-size: 19px;
+}
+
+.emailInput {
+  margin-bottom: 30px;
+}
+
+.passwordInput {
+  margin-bottom: 40px;
+}
+
+.login input {
+  height: 35px;
+  width: 90%;
+  margin-left: 20px;
+  border: none;
+  border-bottom: 1px solid;
+}
+input:focus {
+  border: none;
+  
+}
+
+#btnLogin {
+  height: 47px;
+  width: 70%;
+  margin-left: 15%;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  background-color: #002f9d;
+  margin-bottom: 30px;
+}
+
+.error {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-top: 20px;
+}
+
+.sortiranje {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 50px;
+}
+
+.opcija input{
+    height: 40px;
+    width: 200px;
+    border: none;
+    border-bottom: 1px solid #000f33;
+}
+
+#sort {
+  color: #262626;
+}
+
+#btnSort {
+  height: 45px;
+  width: 100px;
+  background-color: #4d4d4d;
+  color: white;
+  margin-top: 50%;
+  font-size: 16px;
+  border: none;
+}
+
+

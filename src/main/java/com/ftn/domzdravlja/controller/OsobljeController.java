@@ -22,7 +22,7 @@ import com.ftn.domzdravlja.service.OsobljeService;
 @CrossOrigin(origins = "https://localhost:3000")
 @Controller
 @RequestMapping("domZdravlja/osoblje")
-@PreAuthorize("hasRole('STAFF')")
+@PreAuthorize("hasAnyRole('STAFF','ROLE_PATIENT')")
 public class OsobljeController {
 
 	@Autowired

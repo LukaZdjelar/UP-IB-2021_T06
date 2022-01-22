@@ -10,4 +10,5 @@ public interface PregledService {
 	List<Pregled> findPregledByPacient(Integer id);
 	
 	List<Pregled> findAll();
+	Pregled save(Pregled pregled);
 }

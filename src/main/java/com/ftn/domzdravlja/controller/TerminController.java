@@ -44,7 +44,7 @@ public class TerminController {
 	}
 
 	@GetMapping
-	@PreAuthorize("hasAnyRole('ROLE_PACIJENT', 'ROLE_STAFF', 'ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_PATIENT', 'ROLE_STAFF', 'ROLE_ADMIN')")
 	public ResponseEntity<List<TerminDTO>> findAll() {
 		List<Termin> termini = terminService.findAll();
 

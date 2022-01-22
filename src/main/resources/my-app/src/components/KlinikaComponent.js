@@ -55,20 +55,33 @@ function  KlinikaComponent () {
     }
 
         return (
-            <div>
+            <div className='klinika'>
                 <div>
                     <PacijentHeader/>
                 </div>
-                <tr>Sortiranje</tr>
-                <tr>Pocetni datum:</tr>
-                <input type = "date" name= "pocetniDatum" onChange ={handleChange} />
-                <tr>Krajnji datum:</tr>
-                <input type = "date" name= "krajnjiDatum" onChange ={handleChange}/>
-                <tr>Lokacija:</tr>
-                <input type = "text" name="lokacija" onChange ={handleChange}/>
-                <tr>Ocena:</tr>
-                <input type = "number" min="1" max="5" name ="ocena" onChange ={handleChange}/>
-                <button onClick={submitSearch}>Pretrazi</button>
+                
+                <h2 id='sort'>Sortiranje</h2>
+                <div className='sortiranje'>
+                <div className='opcija'>
+                    <p>Pocetni datum:</p>
+                    <input type = "date" name= "pocetniDatum" onChange ={handleChange} />
+                </div>
+                <div className='opcija'>
+                    <p>Krajnji datum:</p>
+                    <input type = "date" name= "krajnjiDatum" onChange ={handleChange}/>
+                </div>
+                <div className='opcija'>
+                    <p>Lokacija:</p>
+                    <input placeholder='Unesite lokaciju' type = "text" name="lokacija" onChange ={handleChange}/>
+                </div>
+                <div className='opcija'>
+                    <p>Ocena:</p>
+                    <input placeholder='Unesite ocenu' type = "number" min="1" max="5" name ="ocena" onChange ={handleChange}/>
+                </div>
+                <div className='opcija'>
+                    <button onClick={submitSearch} id='btnSort'>Sortiraj</button>
+                </div>
+                </div>
                 <h1>Lista svih klinika</h1>
                 <table>
                     <thead>
