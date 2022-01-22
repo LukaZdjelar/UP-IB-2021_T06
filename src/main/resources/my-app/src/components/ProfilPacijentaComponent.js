@@ -38,16 +38,25 @@ class ProfilPacijentaComponent extends React.Component {
         })
     }
 
+    onTextChange(event) {
+        if(event.target.name ==='ime') {
+            this.setState({...this.state, ime: event.target.value})
+        }
+        if(event.target.name === 'prezime') {
+            this.setState({...this.state, prezime: event.target.value})
+        } else {
+            this.setState({...this.state, brojTelefona: event.target.value})
+        }
+    }
     changeEditMode() {
         this.setState({...this.state, isEditMode: !this.state.isEditMode});
     }
-
     savePatient(){
-        axios.post("/domZdravlja/pacijent",{
+        axios.put("/domZdravlja/pacijent/edit",{
+            ... this.state.pacijetCopy,
             ime:this.state.ime,
-             prezime:this.state.prezime,
-                email:this.state.email,
-                brojTelefona:this.state.brojTelefona
+            prezime:this.state.prezime,
+            brojTelefona:this.state.brojTelefona
         })
         .then(response => {
             console.log(response);
@@ -72,18 +81,18 @@ class ProfilPacijentaComponent extends React.Component {
                 <div className="ProfilDiv">
                     {this.state.isEditMode ? (
                         <div>
-                    <input value={this.state.ime} name="ime"/>
-                    <input value={this.state.prezime} name="prezime"/>
-                    <input value={this.state.brojTelefona} name="brojTelefona"/>
-                    <button onClick={this.savePatient}>Sacuvaj</button>
-                    <button onClick={this.changeEditMode}>Odustani</button>
+                    <input value={this.state.ime} name="ime" onChange={this.onTextChange.bind(this)}/>
+                    <input value={this.state.prezime} name="prezime" onChange={this.onTextChange.bind(this)}/>
+                    <input value={this.state.brojTelefona} name="brojTelefona" onChange={this.onTextChange.bind(this)}/>
+                    <button onClick={this.savePatient.bind(this)}>Sacuvaj</button>
+                    <button onClick={this.changeEditMode.bind(this)}>Odustani</button>
                     </div>
                     ):(<div>
                          <p>Name: {this.state.pacijetCopy.ime}</p>
                     <p>Prezime: {this.state.pacijetCopy.prezime}</p>
                     <p>Email: {this.state.pacijetCopy.email}</p>
                     <p>Broj Telefona: {this.state.pacijetCopy.brojTelefona}</p>
-                    { this.state.loggedUserId === this.state.pacijetCopy?.id ?( <button onClick={this.changeEditMode}>Izmeni</button>):""}
+                    { this.state.loggedUserId === this.state.pacijetCopy?.id ?( <button onClick={this.changeEditMode.bind(this)}>Izmeni</button>):""}
                     </div>)}
                    
                 </div>  

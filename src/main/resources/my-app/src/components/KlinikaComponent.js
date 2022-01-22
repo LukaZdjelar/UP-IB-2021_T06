@@ -89,6 +89,7 @@ function  KlinikaComponent () {
                             <td>Naziv</td>
                             <td>Opis</td>
                             <td>Ocena</td>
+                            <td>Ulica</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,6 +100,7 @@ function  KlinikaComponent () {
                                     <a href={`/doktor/${klinika.id}`} onClick={()=>{localStorage.setItem("klinika",klinika.id)}}><td>{klinika.naziv}</td></a>
                                     <td>{klinika.opis}</td>
                                     <td>{klinika.ocena}</td>
+                                    <td>{klinika.adresa?.ulica}</td>
                                 </tr>
                             )
                         }

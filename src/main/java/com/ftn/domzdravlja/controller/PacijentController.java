@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ftn.domzdravlja.dto.PacijentDTO;
@@ -37,16 +38,17 @@ public class PacijentController {
 		
 	}
 	@PutMapping(value="/edit")
-	public ResponseEntity<PacijentDTO> update(Pacijent pacijent) {
+	public ResponseEntity<PacijentDTO> update(@RequestBody PacijentDTO pacijent) {
 		
 		Pacijent nadji = pacijentService.findPacijentById(pacijent.getId());
 		
-		pacijent.setAdresa(nadji.getAdresa());
-		pacijent.setLBO(nadji.getLBO());
+		nadji.setIme(pacijent.getIme());
+		nadji.setPrezime(pacijent.getPrezime());
+		nadji.setBrojTelefona(pacijent.getBrojTelefona());
 		
-		Pacijent p = pacijentService.save(pacijent);
+		pacijentService.save(nadji);
 		
-		return new ResponseEntity<PacijentDTO>(new PacijentDTO(p), HttpStatus.OK);
+		return new ResponseEntity<PacijentDTO>(new PacijentDTO(nadji), HttpStatus.OK);
 	}
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value="/waitingapproval")

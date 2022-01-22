@@ -44,7 +44,7 @@ public class PregledController {
 	PacijentService pacijentService;
 	
 	@GetMapping("/{id}")
-	@PreAuthorize("hasRole('ROLE_STAFF','ROLE_PATIENT')")
+	@PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_PATIENT')")
 	public ResponseEntity<List<PregledDTO>> search(Integer id){
 		
 		
@@ -58,7 +58,7 @@ public class PregledController {
 		
 		return new ResponseEntity<>(dtoList, HttpStatus.OK);
 	}
-	@PreAuthorize("hasRole('ROLE_STAFF','ROLE_PATIENT')")
+	@PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_PATIENT')")
 	@GetMapping
 	public ResponseEntity<List<PregledDTO>> findAll() {
 		List<Pregled> pregledi = pregledService.findAll();
@@ -69,7 +69,7 @@ public class PregledController {
 		Korisnik ulogovan = (Korisnik) authentication.getPrincipal();
 		
 		for (Pregled pregled : pregledi) {
-			if( ulogovan.getId().equals(pregled.getTermin().getLekar().getId())) {
+			if( ulogovan.getId().equals(pregled.getPacijent().getId())) {
 				dtoList.add(new PregledDTO(pregled));
 				System.out.println(pregled.getId());
 			}

@@ -42,7 +42,6 @@ function App() {
           <Route path="/admin/izvestaj" component = {IzvestajComponent} exact />
           <Route path="/admin/:id" component = {AdminAboutPage} exact/>
           <Route path="/pregled" component = {IsotrijaPregledaComponent} exact/>
-          <NavLink activeClassName = "active" to = "/login">Login <small>Acces with token only</small></NavLink>
           </Switch>
           <Route path="/osoblje" component = {SestraProfil} exact/>
           <Route path="/admin/approve" component = {OdobrenjeRegistrovanihComponent} exact/>
@@ -53,7 +52,7 @@ function App() {
       </div>
       <div className = 'content'>
         <Switch>
-          <Route exact path ="/login" component={Login}/>
+          <Route exact path ="/" component={Login}/>
         </Switch>
       </div>
     </Router>
