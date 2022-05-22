@@ -17,13 +17,13 @@ function  KlinikaComponent () {
     const [klinike, setKlinike] = useState([]);
 
    const handleChange =  (event) => {
-        if (event.target.name == "pocetniDatum"){
+        if (event.target.name === "pocetniDatum"){
             setSearch({...search, pocetniDatum:event.target.value})
-        }else if(event.target.name == "krajnjiDatum"){
+        }else if(event.target.name === "krajnjiDatum"){
             setSearch({...search,krajnjiDatum:event.target.value})
-        }else if(event.target.name == "lokacija"){
+        }else if(event.target.name === "lokacija"){
             setSearch({...search,lokacija:event.target.value})
-        }else if(event.target.name == "ocena"){
+        }else if(event.target.name === "ocena"){
             setSearch({...search,ocena:event.target.value})
         }
 

@@ -16,18 +16,22 @@ import AdminDetails from './components/admin/AdminDetails';
 import AdminAboutPage from './pages/AdminAboutPage';
 import IzvestajComponent from './components/IzvestajComponent';
 import index from './index';
+import { useState } from 'react';
+import ProtectedRoutes from './components/ProtectedRoutes';
 import Login from './pages/Login';
 import ReceptComponent from './components/sestra/ReceptComponent';
 import SestraProfil from './components/sestra/SestraProfil';
 import OdobrenjeRegistrovanihComponent from './components/OdobrenjeRegistrovanihComponent';
 import DoktorPrikaz from './components/DoktorPrikaz';
 
+
 function App() {
+  const [isAuth, setIsAuth] = useState(false);
   return (
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/logovaniPacijent" component = {ProfilPacijentaComponent}/>
+          <ProtectedRoutes path="/logovaniPacijent" component = {ProfilPacijentaComponent} isAuth = {isAuth} />
           <Route path="/istorijaPregleda" component = {IsotrijaPregledaComponent}/>
           <Route path="/doktor" component = {DoktorComponent} exact/>
           <Route path="/admin" component = {AdminTable} exact/>

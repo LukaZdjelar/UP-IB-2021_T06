@@ -2,6 +2,8 @@ import OsobljeService from "../services/OsobljeService";
 import OsobljeHeader from "./sestra/OsobljeHeader";
 import React from "react";
 import PacijentHeader from "./PacijentHeader";
+import { BrowserRouter } from "react-router-dom";
+import Nav from "./Nav";
 
 class DoktorPrikaz extends React.Component {
     constructor(props) {
@@ -21,10 +23,13 @@ class DoktorPrikaz extends React.Component {
     render () {
         console.log(this.state.osoblje);
         return (
+            <BrowserRouter>
             <div>
                 <div>
                     <PacijentHeader/>
                 </div>
+                <Nav user={this.state.user}/>
+
                 <h1>Lista svih doktora</h1>
                 <table>
                     <thead>
@@ -50,6 +55,7 @@ class DoktorPrikaz extends React.Component {
                     </tbody>
                 </table>
             </div>
+            </BrowserRouter>
         )
     }
 }

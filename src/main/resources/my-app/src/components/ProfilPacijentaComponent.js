@@ -4,6 +4,7 @@ import PacijentHeader from './PacijentHeader';
 import PacijentService from '../services/PacijentService';
 import axios from 'axios';
 import {getUserId} from './Utils/Common';
+import {withRouter} from "react-router-dom";
 
 
 
@@ -100,4 +101,4 @@ class ProfilPacijentaComponent extends React.Component {
         )
     }
 }
-export default ProfilPacijentaComponent;
+export default withRouter(ProfilPacijentaComponent);
