@@ -28,7 +28,7 @@ class DoktorPrikaz extends React.Component {
                 <div>
                     <PacijentHeader/>
                 </div>
-                <Nav user={this.state.user}/>
+                button = (<Nav user={this.state.user}/>)
 
                 <h1>Lista svih doktora</h1>
                 <table>

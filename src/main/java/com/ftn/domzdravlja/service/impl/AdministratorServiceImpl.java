@@ -3,6 +3,7 @@ package com.ftn.domzdravlja.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ftn.domzdravlja.model.Administrator;
@@ -16,7 +17,7 @@ public class AdministratorServiceImpl implements AdministratorService {
 
 	@Autowired
 	AdministratorRepository administratorRepository;
-
+	PasswordEncoder passwordEncoder;
 	@Override
 	public Administrator findAdministratorById(Integer id) {
 		Administrator administrator = administratorRepository.findAdministratorById(id);
@@ -26,7 +27,8 @@ public class AdministratorServiceImpl implements AdministratorService {
 
 	@Override
 	public Administrator save(Administrator administrator) {
-
+		String endcoderPassword = this.passwordEncoder.encode(administrator.getLozinka());
+		administrator.setLozinka(endcoderPassword);
 		return administratorRepository.save(administrator);
 	}
 

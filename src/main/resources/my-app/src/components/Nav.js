@@ -10,7 +10,7 @@ export default class Nav extends Component{
 
             buttons = (<ul className="navbar-nav ml-auto>">
                 <li className="nav-item">
-                    <Link to={'/'} onClick={() => localStorage.clear}>Login</Link>
+                    <Link to={'/'} onClick={() => localStorage.clear()}>Logout</Link>
                 </li>
             </ul>)
 

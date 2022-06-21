@@ -2,7 +2,6 @@ package com.ftn.domzdravlja.dto;
 
 import java.io.Serializable;
 
-import com.ftn.domzdravlja.model.Adresa;
 import com.ftn.domzdravlja.model.Klinika;
 
 public class KlinikaDTO implements Serializable {
