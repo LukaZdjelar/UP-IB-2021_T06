@@ -108,6 +108,7 @@ function  KlinikaComponent () {
                 </table>
             </div>
         )
-        
 }
+
+
 export default KlinikaComponent;
