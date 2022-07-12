@@ -48,6 +48,7 @@ function App() {
           </Switch>
           <ProtectedRoutes path="/osoblje" component = {SestraProfil} exact expectedRoles ={["ROLE_ADMIN","ROLE_STAFF"]}/>
           <ProtectedRoutes path="/admin/approve" component = {OdobrenjeRegistrovanihComponent} exact expectedRoles ={["ROLE_ADMIN"]}/>
+
           {/* <Route path="/osoblje/:id" component = {SestraAboutPage} exact/> */}
           {/* <Route path="/klinickicentar/recept/overi/:id" component = {receptOvera} exact/> */}
           <ProtectedRoutes path="/recepti" component = {ReceptComponent} exact expectedRoles ={["ROLE_ADMIN","ROLE_STAFF"]}/>

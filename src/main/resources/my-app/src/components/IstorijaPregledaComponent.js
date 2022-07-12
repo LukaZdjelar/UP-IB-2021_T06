@@ -17,9 +17,10 @@ class PregledComponent extends React.Component {
         });
     }
 
-    render () {
+    
+    render(){
         console.log(this.state.pregledi);
-        return (
+        return(
             <div>
                 <div>
                     <PacijentHeader/>
@@ -47,8 +48,10 @@ class PregledComponent extends React.Component {
                         }
                     </tbody>
                 </table>
+                
             </div>
         )
     }
+    
 }
 export default PregledComponent;

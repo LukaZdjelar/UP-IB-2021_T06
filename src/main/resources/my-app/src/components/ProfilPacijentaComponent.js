@@ -20,6 +20,7 @@ class ProfilPacijentaComponent extends React.Component {
             isEditMode: false,
             loggedUserId: null
         }
+
     }
    
 
@@ -101,4 +102,5 @@ class ProfilPacijentaComponent extends React.Component {
         )
     }
 }
+
 export default withRouter(ProfilPacijentaComponent);
