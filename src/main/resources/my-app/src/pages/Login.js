@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getAccessToken, getRefreshToken, SetAccessToken, SetRefreshToken, removeUserSession , getUserRoles} from '../components/Utils/Common';
 
 function Login (props){
@@ -10,6 +10,23 @@ function Login (props){
     const [loading,setLoading]= useState(false);
 
     const email = useFormInput('');
+    const navigateToPropperPage = ()  =>{
+        let userRoles  = getUserRoles();
+
+        if(userRoles.includes("ROLE_ADMIN")){
+            props.history.push('/admin/approve');
+        }else if(userRoles.includes("ROLE_PATIENT")){
+            props.history.push('/pacijentProfil')
+        }else if(userRoles.includes("ROLE_STAFF")){
+            props.history.push('/osoblje')
+        }
+    }
+    useEffect(() =>{
+        const token = getAccessToken();
+        if(token) {
+            navigateToPropperPage()
+        } 
+    })
     const password = useFormInput('');
 
     const handleLogin = () =>{
@@ -23,19 +40,7 @@ function Login (props){
             setLoading(false);
             SetAccessToken(response.data.access_token)
             SetRefreshToken(response.data.refreshToken)
-            let userRoles  = getUserRoles("ADMIN");
-
-            if(userRoles.includes("ROLE_ADMIN")){
-                props.history.push('/admin/approve');
-            }else if(userRoles.includes("ROLE_NURSE")){
-                props.history.push('/sestra')
-            }else if(userRoles.includes("ROLE_DOCTOR")){
-                props.history.push('/doctor')
-            }else if(userRoles.includes("ROLE_PATIENT")){
-                props.history.push('/pacijent')
-            }else if(userRoles.includes("ROLE_STAFF")){
-                props.history.push('/osoblje')
-            }
+            navigateToPropperPage();
             // props.history.push('/admin');
             console.log('response >>> ', response);
         }).catch(error => {
@@ -51,20 +56,22 @@ function Login (props){
     }
 
 
-    return(        <div>
-        Login<br/> <br/>
-        <div>
+    return(   
+    
+    <div className='login'> 
+        <h2>Login</h2>
+        <div className='emailInput'>
             <label>Email</label>
-            <input type="text" {...email} autoComplete="new-password" />
+            <input placeholder='Enter your email' type="text" {...email} autoComplete="new-password" />
         </div>
-        <div>
+        <div className='passwordInput'>
             <label>Password</label>
-            <input type="password" {...password} autoComplete="new-password"/>
+            <input  placeholder='Enter your password' type="password" {...password} autoComplete="new-password"/>
         </div>
         <div>
             {error && <div className='error'>{error}</div>}
 
-            <input type="button" value={loading ? 'Loading...' : 'Login'} onClick={handleLogin} disabled={loading} /><br />
+            <input type="button" id='btnLogin' value={loading ? 'Loading...' : 'Login'} onClick={handleLogin} disabled={loading} />
         </div>
 
     </div>);

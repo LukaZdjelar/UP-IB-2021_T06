@@ -1,12 +1,17 @@
 package com.ftn.domzdravlja.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +35,9 @@ public class Klinika {
 
 	@Column(name = "opis", unique = false, nullable = false)
 	private String opis;
+
+	@OneToMany(mappedBy = "klinika", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<Termin> termini;
 
 	public Klinika() {
 
@@ -66,6 +74,14 @@ public class Klinika {
 
 	public void setAdresa(Adresa adresa) {
 		this.adresa = adresa;
+	}
+
+	public Set<Termin> getTermini() {
+		return termini;
+	}
+
+	public void setTermini(Set<Termin> termini) {
+		this.termini = termini;
 	}
 
 	public String getOpis() {

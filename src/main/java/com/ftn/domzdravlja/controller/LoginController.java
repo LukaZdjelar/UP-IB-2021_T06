@@ -1,37 +1,29 @@
 package com.ftn.domzdravlja.controller;
 
 import java.io.IOException;
-import java.time.Instant;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftn.domzdravlja.controller.LoginController.PasswordChanger;
 import com.ftn.domzdravlja.dto.KorisnikTokenStatedDTO;
 import com.ftn.domzdravlja.dto.RefreshTokenRequestDto;
 import com.ftn.domzdravlja.exception.TokenRefreshException;
 import com.ftn.domzdravlja.model.Korisnik;
 import com.ftn.domzdravlja.model.RefreshToken;
-import com.ftn.domzdravlja.repository.RefreshTokenRepository;
 import com.ftn.domzdravlja.security.LoginAuthenticationRequest;
 import com.ftn.domzdravlja.security.TokenHelper;
 import com.ftn.domzdravlja.service.CustomUserDetailService;

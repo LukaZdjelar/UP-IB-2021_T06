@@ -22,12 +22,16 @@ class PregledComponent extends React.Component {
         console.log(this.state.pregledi);
         return(
             <div>
-                <PacijentHeader /> 
+                <div>
+                    <PacijentHeader/>
+                </div>
+                <h1>Istorija pregleda</h1>
                 <table>
                     <thead>
                         <tr>
                             <td>Termin</td>
                             <td>Opis</td>
+                            <td>Trajanje</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,8 +39,10 @@ class PregledComponent extends React.Component {
                             this.state.pregledi.map (
                                 pregled => 
                                 <tr key = {pregled.id}>
-                                    <td>{pregled.termin}</td>
+                                    <td>{pregled.termin?.datumIVreme}</td>
                                     <td>{pregled.opis}</td>
+                                    <td>{pregled.termin?.trajanje} min</td>
+
                                 </tr>
                             )
                         }

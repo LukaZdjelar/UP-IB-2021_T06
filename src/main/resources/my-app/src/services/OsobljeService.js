@@ -9,5 +9,9 @@ class OsobljeService {
     getOsobljeById(id){
         return axios.get(`${USERS_REST_API_URL}/${id}`);
     }
+
+    getOsobljeByKlinika(klinikaId){
+        return axios.get(`${USERS_REST_API_URL}/klinika/${klinikaId}`)
+    }
 }
 export default new OsobljeService();

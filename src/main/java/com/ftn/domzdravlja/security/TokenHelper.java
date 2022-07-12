@@ -91,6 +91,7 @@ public class TokenHelper {
                 .setIssuedAt(timeProvider.now())
                 .signWith(SIGNATURE_ALGORITHM, SECRET)
                 .claim("roles", korisnik.getAuthorities())
+                .claim("userId", korisnik.getId())
                 .compact();
     }
 

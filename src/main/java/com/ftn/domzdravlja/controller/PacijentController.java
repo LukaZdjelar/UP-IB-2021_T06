@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ftn.domzdravlja.dto.PacijentDTO;
@@ -27,7 +28,7 @@ public class PacijentController {
 	
 	@Autowired
 	PacijentService pacijentService;
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PACIJENT', 'ROLE_STAFF')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PATIENT', 'ROLE_STAFF')")
 	@GetMapping(value="/{id}")
 	public ResponseEntity<PacijentDTO> get(@PathVariable("id") Integer id) {
 		
@@ -36,19 +37,20 @@ public class PacijentController {
 		return new ResponseEntity<PacijentDTO>(new PacijentDTO(p), HttpStatus.OK);
 		
 	}
-	@PutMapping(value="/edit")
-	public ResponseEntity<PacijentDTO> update(Pacijent pacijent) {
+	@PutMapping(value="/edit")@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')")
+	public ResponseEntity<PacijentDTO> update(@RequestBody PacijentDTO pacijent) {
 		
 		Pacijent nadji = pacijentService.findPacijentById(pacijent.getId());
 		
-		pacijent.setAdresa(nadji.getAdresa());
-		pacijent.setLBO(nadji.getLBO());
+		nadji.setIme(pacijent.getIme());
+		nadji.setPrezime(pacijent.getPrezime());
+		nadji.setBrojTelefona(pacijent.getBrojTelefona());
 		
-		Pacijent p = pacijentService.save(pacijent);
+		pacijentService.save(nadji);
 		
-		return new ResponseEntity<PacijentDTO>(new PacijentDTO(p), HttpStatus.OK);
+		return new ResponseEntity<PacijentDTO>(new PacijentDTO(nadji), HttpStatus.OK);
 	}
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')")
 	@GetMapping(value="/waitingapproval")
 	public ResponseEntity<List<PacijentDTO>> getAll() {
 		List<Pacijent> pacijenti = pacijentService.findAll();
@@ -73,6 +75,7 @@ public class PacijentController {
 	}
 	
 	@GetMapping
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_STAFF')")
 	public ResponseEntity<List<PacijentDTO>> search(){
 		
 		List<Pacijent> pacijenti = pacijentService.findAll();

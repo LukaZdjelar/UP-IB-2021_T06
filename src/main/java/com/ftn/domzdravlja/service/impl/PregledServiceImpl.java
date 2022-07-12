@@ -24,4 +24,9 @@ public class PregledServiceImpl implements PregledService{
 	public List<Pregled> findAll() {
 		return pregledRepository.findAll();	
 	}
+
+	@Override
+	public Pregled save(Pregled pregled) {
+		return pregledRepository.save(pregled);
+	}
 }

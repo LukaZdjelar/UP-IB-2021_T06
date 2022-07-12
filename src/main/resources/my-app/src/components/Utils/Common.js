@@ -30,12 +30,24 @@ export const removeUserSession = () => {
 
 export const getUserRoles = () => {
     const token = localStorage.getItem("accessToken");
-
+    if(!token) {
+        return [];
+    }
     var decoded = jwtDecode(token);
     if(decoded) {
         return decoded.roles?.map(r => r?.authority)
     }
     return [];
+}
+
+export const getUserId = () => {
+    const token = localStorage.getItem("accessToken");
+
+    var decoded = jwtDecode(token);
+    if(decoded) {
+        return decoded.userId
+    }
+    return 0;
 }
 
 export const refreshToken = async() => {
@@ -47,3 +59,15 @@ export const refreshToken = async() => {
         SetRefreshToken(nrt);
     })
 }
+ export const isUserLoggedIn = () => {
+    const token = localStorage.getItem("accessToken");
+    return token && token !== undefined ? true: false;
+ }
+
+ export const hasUserPermission = function (expectedRoles) {
+    const userRoles = getUserRoles();
+    if(!userRoles.length){
+        return false;
+    }
+    return userRoles.some(role => expectedRoles.includes(role));
+ }

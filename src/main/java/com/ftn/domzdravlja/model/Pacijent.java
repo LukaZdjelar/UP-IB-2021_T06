@@ -15,8 +15,6 @@ public class Pacijent extends Korisnik {
 		super();
 	}
 
-	
-
 	public Pacijent(Integer id, String ime, String prezime, String email, String lozinka, Adresa adresa,
 			String brojTelefona, boolean approved, String lBO) {
 		super(id, ime, prezime, email, lozinka, adresa, brojTelefona, approved);

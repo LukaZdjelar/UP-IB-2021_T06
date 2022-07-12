@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import {withRouter} from 'react-router'
+import {withRouter} from 'react-router-dom'
 
 class AdminDetails extends React.Component{
 

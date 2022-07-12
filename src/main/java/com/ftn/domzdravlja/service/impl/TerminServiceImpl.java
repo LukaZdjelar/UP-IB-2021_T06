@@ -38,4 +38,9 @@ public class TerminServiceImpl implements TerminService {
 		return termin;
 	}
 
+	@Override
+	public List<Termin> getTerminByLekar(Integer doktorId) {
+		return terminRepository.findAllByLekar_Id(doktorId);
+	}
+
 }

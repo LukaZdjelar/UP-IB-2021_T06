@@ -12,6 +12,9 @@ public class PacijentDTO implements Serializable {
 	private String email;
 	private String brojTelefona;
 	
+	public PacijentDTO() {
+		
+	}
 
 	public PacijentDTO(Pacijent pacijent) {
 		id=pacijent.getId();
