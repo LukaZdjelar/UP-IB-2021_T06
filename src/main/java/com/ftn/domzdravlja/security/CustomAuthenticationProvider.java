@@ -12,8 +12,9 @@ import com.ftn.domzdravlja.model.Korisnik;
 import com.ftn.domzdravlja.service.KorisnikService;
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider  {
-
+	@Autowired
 	 private KorisnikService userService;
+	 @Autowired
 	 private PasswordEncoder passwordEncoder;
 	 
 	@Autowired
@@ -35,7 +36,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider  {
 	     if(password == null) {
 	    	 throw new RuntimeException("Invalid password.");
 	     }
-	     boolean matches = password.equals(korisnik.getPassword());
+	     boolean matches = passwordEncoder.matches(password, korisnik.getPassword());
 	     if (!matches) {
 	        throw new RuntimeException("Invalid username or password.");
 	     }

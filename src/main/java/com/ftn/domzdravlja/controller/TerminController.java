@@ -29,7 +29,7 @@ public class TerminController {
 	@Autowired
 	private TerminService terminService;
 
-	@PreAuthorize("hasRole('ROLE_DOCTOR')")
+	@PreAuthorize("hasAnyRole('ROLE_DOCTOR','ROLE_ADMIN')")
 	@PostMapping("/create")
 	public ResponseEntity<TerminDTO> create(Termin termin, String DIVString) {
 
@@ -58,12 +58,14 @@ public class TerminController {
 	}
 
 	@GetMapping(value = "/{id}")
+	@PreAuthorize("hasAnyRole('ROLE_PATIENT', 'ROLE_STAFF', 'ROLE_ADMIN')")
 	public ResponseEntity<TerminDTO> get(@PathVariable("id") Integer id) {
 		Termin termin = terminService.findTerminById(id);
 		return new ResponseEntity<TerminDTO>(new TerminDTO(termin), HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/date")
+	@PreAuthorize("hasAnyRole('ROLE_PATIENT', 'ROLE_STAFF', 'ROLE_ADMIN')")
 	public ResponseEntity<List<TerminDTO>> date(Date pocetni, Date krajnji){
 		
 		List<Termin> termin = (List<Termin>) terminService.findAllTermini(pocetni, krajnji);
@@ -78,6 +80,7 @@ public class TerminController {
 	}
 	
 	@GetMapping(value="/doktor/{id}")
+	@PreAuthorize("hasAnyRole('ROLE_PATIENT', 'ROLE_STAFF', 'ROLE_ADMIN')")
 	public ResponseEntity<List<TerminDTO>> getByLekar(@PathVariable("id") Integer id) {
 		
 		List<Termin> doktorList = terminService.getTerminByLekar(id);

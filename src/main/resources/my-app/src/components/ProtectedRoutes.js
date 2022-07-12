@@ -1,12 +1,14 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import { hasUserPermission } from "./Utils/Common";
 
-function ProtectedRoutes({isAuth : isAuth, component: Component, ...rest}){
+function ProtectedRoutes({expectedRoles : expectedRoles, component: Component, ...rest}){
+
     return (
         <Route 
         {...rest} 
         render = {(props) =>{
-        if(isAuth){
+        if(expectedRoles?.length  && hasUserPermission(expectedRoles)){
             return <Component />
         } else {
             return<Redirect to={{pathname: '/', state : { from: props.location } }} />;

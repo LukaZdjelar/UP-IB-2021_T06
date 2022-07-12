@@ -22,43 +22,46 @@ import com.ftn.domzdravlja.service.OsobljeService;
 @CrossOrigin(origins = "https://localhost:3000")
 @Controller
 @RequestMapping("domZdravlja/osoblje")
-@PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_PATIENT')")
+@PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_PATIENT','ROLE_ADMIN')")
 public class OsobljeController {
 
 	@Autowired
 	OsobljeService osobljeService;
-	
-	@GetMapping(value="/{id}")
+
+	@PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_ADMIN')")
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<OsobljeDTO> get(@PathVariable("id") Integer id) {
-		
+
 		Osoblje o = osobljeService.findOsobljeById(id);
-		
+
 		return new ResponseEntity<OsobljeDTO>(new OsobljeDTO(o), HttpStatus.OK);
-		
+
 	}
-	
-	@GetMapping(value="/klinika/{id}")
+
+	@GetMapping(value = "/klinika/{id}")
+@PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_PATIENT','ROLE_ADMIN')")
 	public ResponseEntity<List<OsobljeDTO>> getByKlinika(@PathVariable("id") Integer id) {
-		
+
 		List<Osoblje> osobljeList = osobljeService.getOsobljeByKlinika(id);
 		List<OsobljeDTO> dtoList = new ArrayList<OsobljeDTO>();
-		for(Osoblje o: osobljeList) {
+		for (Osoblje o : osobljeList) {
 			dtoList.add(new OsobljeDTO(o));
 		}
-		
+
 		return new ResponseEntity<List<OsobljeDTO>>(dtoList, HttpStatus.OK);
-		
+
 	}
-	
-	@PutMapping(value="/edit")
+
+	@PutMapping(value = "/edit")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<OsobljeDTO> update(Osoblje osoblje) {
-		
+
 		Osoblje nadji = osobljeService.findOsobljeById(osoblje.getId());
 		osoblje.setAdresa(nadji.getAdresa());
 		osoblje.setKlinika(nadji.getKlinika());
 		osoblje.setLekar(nadji.getLekar());
 		Osoblje o = osobljeService.save(osoblje);
-		
+
 		return new ResponseEntity<OsobljeDTO>(new OsobljeDTO(o), HttpStatus.OK);
 	}
 }

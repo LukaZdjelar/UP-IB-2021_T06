@@ -48,6 +48,7 @@ public class KlinikaController {
 	}
 	
 	@GetMapping
+	@PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_PATIENT','ROLE_ADMIN')")
 	public ResponseEntity<List<KlinikaDTO> > search(@RequestParam(name = "pocetniDatum", required = false)  String pocetniDatum,@RequestParam(name ="krajnjiDatum", required = false)  String krajnjiDatum,
 			@RequestParam(name ="lokacija", required = false) String lokacija, @RequestParam(name ="ocena", required = false) Double ocena){
 		

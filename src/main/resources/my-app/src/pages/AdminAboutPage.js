@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 import AdminDetails from '../components/admin/AdminDetails'
 
 const adminAboutPage = props =>{

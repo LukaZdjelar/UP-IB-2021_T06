@@ -37,7 +37,7 @@ public class PacijentController {
 		return new ResponseEntity<PacijentDTO>(new PacijentDTO(p), HttpStatus.OK);
 		
 	}
-	@PutMapping(value="/edit")
+	@PutMapping(value="/edit")@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')")
 	public ResponseEntity<PacijentDTO> update(@RequestBody PacijentDTO pacijent) {
 		
 		Pacijent nadji = pacijentService.findPacijentById(pacijent.getId());
@@ -50,7 +50,7 @@ public class PacijentController {
 		
 		return new ResponseEntity<PacijentDTO>(new PacijentDTO(nadji), HttpStatus.OK);
 	}
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')")
 	@GetMapping(value="/waitingapproval")
 	public ResponseEntity<List<PacijentDTO>> getAll() {
 		List<Pacijent> pacijenti = pacijentService.findAll();
@@ -75,6 +75,7 @@ public class PacijentController {
 	}
 	
 	@GetMapping
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_STAFF')")
 	public ResponseEntity<List<PacijentDTO>> search(){
 		
 		List<Pacijent> pacijenti = pacijentService.findAll();

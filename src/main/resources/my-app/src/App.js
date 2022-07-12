@@ -26,32 +26,31 @@ import DoktorPrikaz from './components/DoktorPrikaz';
 
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
   return (
     <Router>
       <div className="App">
         <Switch>
-          <ProtectedRoutes path="/logovaniPacijent" component = {ProfilPacijentaComponent} isAuth = {isAuth} />
-          <Route path="/istorijaPregleda" component = {IsotrijaPregledaComponent}/>
-          <Route path="/doktor" component = {DoktorComponent} exact/>
-          <Route path="/admin" component = {AdminTable} exact/>
-          <Route path="/klinika" component = {KlinikaComponent} exact/>
+          <ProtectedRoutes path="/logovaniPacijent" component = {ProfilPacijentaComponent} exact expectedRoles ={["ROLE_ADMIN","ROLE_PATIENT"]}/>
+          <ProtectedRoutes path="/istorijaPregleda" component = {IsotrijaPregledaComponent} exact expectedRoles ={["ROLE_ADMIN","ROLE_STAFF"]} />
+          <ProtectedRoutes path="/doktor" component = {DoktorComponent} exact expectedRoles ={["ROLE_ADMIN","ROLE_STAFF"]}/>
+          <ProtectedRoutes path="/admin" component = {AdminTable} exact expectedRoles ={["ROLE_ADMIN"]}/>
+          <ProtectedRoutes path="/klinika" component = {KlinikaComponent} exact expectedRoles ={["ROLE_ADMIN","ROLE_PATIENT","ROLE_STAFF"]}/>
           {/* <Route path="/pregled" component = {PregledComponent} exact/> */}
-          <Route path="/doktor/:klinikaId" component = {DoktorPrikaz} exact/>
-          <Route path="/sestra" component = {SestraComponent} exact/>
-          <Route path="/termin/:doktorId" component = {TerminComponent} exact/>
-          <Route path="/pacijent" component = {PacijentComponent} exact/>
-          <Route path="/pacijentProfil" component = {ProfilPacijentaComponent} exact/>
-          <Route path="/osoblje/radnikalendar" component = {RadniKalendar} exact />
-          <Route path="/admin/izvestaj" component = {IzvestajComponent} exact />
-          <Route path="/admin/:id" component = {AdminAboutPage} exact/>
-          <Route path="/pregled" component = {IsotrijaPregledaComponent} exact/>
+          <ProtectedRoutes path="/doktor/:klinikaId" component = {DoktorPrikaz} exact expectedRoles ={["ROLE_ADMIN","ROLE_STAFF"]}/>
+          <ProtectedRoutes path="/sestra" component = {SestraComponent} exact expectedRoles ={["ROLE_ADMIN","ROLE_STAFF"]}/>
+          <ProtectedRoutes path="/termin/:doktorId" component = {TerminComponent} exact expectedRoles ={["ROLE_ADMIN","ROLE_STAFF","ROLE_PATIENT"]}/>
+          <ProtectedRoutes path="/pacijent" component = {PacijentComponent} exact expectedRoles ={["ROLE_ADMIN","ROLE_STAFF","ROLE_PATIENT"]}/>
+          <ProtectedRoutes path="/pacijentProfil" component = {ProfilPacijentaComponent} exact expectedRoles ={["ROLE_ADMIN","ROLE_STAFF","ROLE_PATIENT"]}/>
+          <ProtectedRoutes path="/osoblje/radnikalendar" component = {RadniKalendar} exact expectedRoles ={["ROLE_ADMIN","ROLE_STAFF"]} />
+          <ProtectedRoutes path="/admin/izvestaj" component = {IzvestajComponent} exact expectedRoles ={["ROLE_ADMIN","ROLE_STAFF"]} />
+          <ProtectedRoutes path="/admin/:id" component = {AdminAboutPage} exact expectedRoles ={["ROLE_ADMIN"]}/>
+          <ProtectedRoutes path="/pregled" component = {IsotrijaPregledaComponent} exact expectedRoles ={["ROLE_ADMIN","ROLE_STAFF"]}/>
           </Switch>
-          <Route path="/osoblje" component = {SestraProfil} exact/>
-          <Route path="/admin/approve" component = {OdobrenjeRegistrovanihComponent} exact/>
+          <ProtectedRoutes path="/osoblje" component = {SestraProfil} exact expectedRoles ={["ROLE_ADMIN","ROLE_STAFF"]}/>
+          <ProtectedRoutes path="/admin/approve" component = {OdobrenjeRegistrovanihComponent} exact expectedRoles ={["ROLE_ADMIN"]}/>
           {/* <Route path="/osoblje/:id" component = {SestraAboutPage} exact/> */}
           {/* <Route path="/klinickicentar/recept/overi/:id" component = {receptOvera} exact/> */}
-          <Route path="/recepti" component = {ReceptComponent} exact/>
+          <ProtectedRoutes path="/recepti" component = {ReceptComponent} exact expectedRoles ={["ROLE_ADMIN","ROLE_STAFF"]}/>
           {/* <Route path="/doktor/pregledi" component = {PregledComponent} exact /> */}
       </div>
       <div className = 'content'>

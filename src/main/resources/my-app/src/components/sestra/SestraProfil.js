@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import OsobljeHeader from './OsobljeHeader'
+import { getUserId } from '../Utils/Common'
 
 
 class SestraProfil extends React.Component {
@@ -14,7 +15,8 @@ class SestraProfil extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("/domZdravlja/osoblje/"+3)
+        const userID = getUserId();
+        axios.get("/domZdravlja/osoblje/"+userID)
         .then(response => {
             console.log(response);
             this.setState({

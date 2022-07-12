@@ -44,7 +44,7 @@ public class PregledController {
 	PacijentService pacijentService;
 	
 	@GetMapping("/{id}")
-	@PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_PATIENT')")
+	@PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_PATIENT','ROLE_ADMIN')")
 	public ResponseEntity<List<PregledDTO>> search(Integer id){
 		
 		

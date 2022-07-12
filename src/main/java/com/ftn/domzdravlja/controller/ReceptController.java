@@ -28,7 +28,7 @@ public class ReceptController {
 	ReceptService receptService;
 	
 	@GetMapping
-	@PreAuthorize("hasRole('ROLE_NURSE')")
+	@PreAuthorize("hasAnyRole('ROLE_NURSE','ROLE_ADMIN')")
 	public ResponseEntity<List<ReceptDTO>> findAll() {
 		
 		List<Recept> recepti = receptService.findAll();
@@ -43,6 +43,7 @@ public class ReceptController {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasAnyRole('ROLE_NURSE','ROLE_ADMIN')")
 	public ResponseEntity<ReceptDTO> create(Recept recept) {
 		receptService.save(recept);
 		return new ResponseEntity<ReceptDTO>(new ReceptDTO(recept), HttpStatus.OK);
